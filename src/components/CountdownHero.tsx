@@ -68,6 +68,10 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, locatio
                 <Separator />
                 <TimeUnit value={timeLeft.s} label="SECONDS" />
             </div>
+
+            <div className="bg-emerald-900/30 text-emerald-300 px-4 py-1.5 rounded-full text-xs font-medium tracking-wider mt-8 border border-emerald-500/20">
+                FAST PROGRESS: 75% COMPLETE
+            </div>
         </div>
     );
 };
