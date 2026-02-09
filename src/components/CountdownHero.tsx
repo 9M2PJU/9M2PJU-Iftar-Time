@@ -9,7 +9,7 @@ interface CountdownHeroProps {
     hijriDate?: string;
 }
 
-export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, hijriDate }) => {
+export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, locationName, hijriDate }) => {
     const [timeLeft, setTimeLeft] = useState<{ h: number; m: number; s: number } | null>(null);
 
     useEffect(() => {
