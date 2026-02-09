@@ -85,6 +85,21 @@ function App() {
             <PrayerGrid prayers={prayerList} />
           </div>
         )}
+
+        {/* Footer */}
+        <footer className="w-full text-center py-4 mt-auto">
+          <p className="text-slate-500 text-xs font-medium tracking-wide">
+            Made with <span className="text-red-500 animate-pulse">❤️</span> by{' '}
+            <a
+              href="https://hamradio.my"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emerald-500 hover:text-emerald-400 transition-colors uppercase"
+            >
+              9M2PJU
+            </a>
+          </p>
+        </footer>
       </main>
     </div>
   );
