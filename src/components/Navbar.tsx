@@ -17,17 +17,16 @@ export const Navbar: React.FC<NavbarProps> = ({ locationName = "Detecting Locati
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
                     </svg>
                 </div>
-                <div className="hidden md:block">
-                    <div className="flex items-center gap-3">
-                        <div className="md:hidden text-emerald-400">
-                            <MapPin size={20} />
-                        </div>
-                        <h1 className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-                            9M2PJU Iftar Time
-                        </h1>
-                    </div>
-                    <p className="text-xs text-slate-400 tracking-wider">MODERN COMPANION DURING RAMADHAN</p>
+            </div>
+
+            {/* Centered Title */}
+            <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex-col items-center">
+                <div className="flex items-center gap-3">
+                    <h1 className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                        9M2PJU Iftar Time
+                    </h1>
                 </div>
+                <p className="text-xs text-slate-400 tracking-wider text-center">MODERN COMPANION DURING RAMADHAN</p>
             </div>
 
 
