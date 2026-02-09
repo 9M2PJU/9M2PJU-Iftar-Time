@@ -1,39 +1,82 @@
-# 9M2PJU Iftar Time
+# 9M2PJU Iftar Time 🌙
 
-A modern, beautiful PWA for checking Iftar and prayer times, designed with a premium dark Islamic aesthetic.
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/9M2PJU/9M2PJU-Iftar-Time)
+![GitHub last commit](https://img.shields.io/github/last-commit/9M2PJU/9M2PJU-Iftar-Time)
+![GitHub license](https://img.shields.io/github/license/9M2PJU/9M2PJU-Iftar-Time)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/9M2PJU/9M2PJU-Iftar-Time/deploy.yml)
 
-## Features
-- **Accurate Iftar Countdown**: Big, clear timer to Maghrib.
-- **Geolocation**: Automatically detects your zone and fetches data from `waktusolat.app`.
-- **Prayer Times**: Grid view of all prayer times (Fajr, Syuruk, Dhuhr, Asr, Maghrib, Isha).
-- **PWA Support**: Installable on Desktop and Mobile.
-- **Offline Capable**: Works without internet after initial load.
+**MODERN COMPANION DURING RAMADHAN**
 
-## Setup
+A beautiful, high-performance Progressive Web App (PWA) designed to provide accurate prayer times and Iftar countdowns with a premium dark Islamic aesthetic. Built for speed, reliability, and offline usage.
 
-1. **Install Dependencies**
-   ```bash
-   npm install
-   ```
+## 🚀 Features
 
-2. **Run Locally**
-   ```bash
-   npm run dev
-   ```
+- **Dynamic Iftar Countdown**: Large, easy-to-read countdown timer to Maghrib.
+- **Smart Geolocation**: Automatically detects your zone and fetches official JAKIM data via `waktusolat.app`.
+- **Prayer Grid**: Clean visualization of all 5 daily prayers + Syuruk.
+- **Hijri Date**: Displays the current Islamic date (e.g., *21 Sha'ban 1447*).
+- **Offline PWA**: Installable on iOS/Android, works without internet after first load.
+- **Perfect Fit Layout**: Optimized for desktop and mobile screens (no scrollbar on standard views).
 
-3. **Build for Production**
-   ```bash
-   npm run build
-   ```
+## 🛠️ Tech Stack
 
-4. **Deploy to GitHub Pages**
-   - Ensure `vite.config.ts` has the correct `base` URL (currently `/9M2PJU-Iftar-Time/`).
-   - Push to GitHub.
-   - Go to Settings > Pages > Source: `gh-pages` branch (or configure Actions).
+- **Framework**: React 18 + TypeScript + Vite
+- **Styling**: Tailwind CSS (v4) + Lucide Icons
+- **State Management**: React Hooks (Custom `useSolat`, `useGeoLocation`)
+- **Date Handling**: `date-fns`
 
-## Tech Stack
-- React + TypeScript + Vite
-- TailwindCSS (v4)
-- Framer Motion
-- date-fns
-- Lucide React
+## 🏗️ Architecture
+
+```mermaid
+graph TD
+    User[User Device] -->|Visits PWA| App[React App]
+    App -->|Get Location| Geo[Geolocation API]
+    App -->|Fetch Zone Data| API[waktusolat.ap]
+    API -->|JSON Response| App
+    App -->|Calculate| Logic[Prayer Logic]
+    Logic -->|Format Time| Display[UI Display]
+    
+    subgraph "Capabilities"
+    PWA[Service Worker]
+    Cache[Local Storage]
+    end
+    
+    App -.-> PWA
+```
+
+## 📦 Installation
+
+To run this project locally:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/9M2PJU/9M2PJU-Iftar-Time.git
+    cd 9M2PJU-Iftar-Time
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+
+3.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
+
+4.  **Build for production:**
+    ```bash
+    npm run build
+    ```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for any improvements.
+
+---
+
+<p align="center">
+  Made with ❤️ by <a href="https://hamradio.my">9M2PJU</a>
+</p>
