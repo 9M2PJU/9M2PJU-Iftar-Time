@@ -35,12 +35,12 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, locatio
     if (!timeLeft) return <div className="animate-pulse h-48 w-full bg-slate-800/50 rounded-3xl" />;
 
     return (
-        <div className="relative w-full flex flex-col items-center justify-center py-6 md:py-4">
+        <div className="relative w-full flex flex-col items-center justify-center py-2 md:py-4">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
 
 
 
-            <div className="relative z-10 text-center space-y-6 md:space-y-4 max-w-4xl mx-auto">
+            <div className="relative z-10 text-center space-y-4 md:space-y-4 max-w-4xl mx-auto">
 
                 {/* Header Badge */}
                 <div className="animate-in fade-in slide-in-from-top-4 duration-700 delay-100 flex flex-col items-center gap-3">
@@ -57,7 +57,7 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, locatio
                 </div>
             </div>
 
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 md:mb-6 tracking-tight">
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 md:mb-6 tracking-tight">
                 Time until <span className="text-emerald-400">Iftar</span>
             </h2>
 
@@ -69,7 +69,7 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, locatio
                 <TimeUnit value={timeLeft.s} label="SECONDS" />
             </div>
 
-            <div className="bg-emerald-900/30 text-emerald-300 px-4 py-1.5 rounded-full text-xs font-medium tracking-wider mt-8 border border-emerald-500/20">
+            <div className="bg-emerald-900/30 text-emerald-300 px-4 py-1.5 rounded-full text-xs font-medium tracking-wider mt-5 border border-emerald-500/20">
                 FAST PROGRESS: 75% COMPLETE
             </div>
         </div>
