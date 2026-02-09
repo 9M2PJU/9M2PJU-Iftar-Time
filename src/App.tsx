@@ -79,27 +79,7 @@ function App() {
           </div>
         )}
 
-        {/* Dua Section */}
-        <div className="max-w-3xl mx-auto mt-12 md:mt-20 p-8 rounded-3xl bg-emerald-950/20 border border-emerald-500/10 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
 
-          <div className="flex gap-6 items-start">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center shrink-0">
-              <svg className="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-white mb-2">Dua for Breaking Fast</h3>
-              <p className="text-emerald-100/80 italic text-lg leading-relaxed mb-4">
-                "Dhahaba al-zamau wa'btallat al-'uruq wa thabata al-ajru in sha Allah"
-              </p>
-              <p className="text-sm text-slate-400 font-medium tracking-wide uppercase">
-                Thirst has gone, the veins are moistened, and the reward is certain, if Allah wills.
-              </p>
-            </div>
-          </div>
-        </div>
 
       </main>
     </div>
