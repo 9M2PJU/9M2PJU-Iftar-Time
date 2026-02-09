@@ -60,10 +60,10 @@ function App() {
   }
 
   return (
-    <div className="h-screen w-full bg-[#0f172a] text-white selection:bg-emerald-500/30 flex flex-col overflow-x-hidden md:overflow-hidden">
+    <div className="min-h-screen w-full bg-[#0f172a] text-white selection:bg-emerald-500/30 flex flex-col relative">
       <Navbar locationName={zone || "Locating..."} />
 
-      <main className="flex-1 container mx-auto px-4 flex flex-col justify-center items-center w-full max-w-7xl pb-8 md:pb-0 gap-8 md:gap-12">
+      <main className="flex-1 container mx-auto px-4 flex flex-col justify-center items-center w-full max-w-7xl py-8 gap-8 md:gap-10">
         {geoError && (
           <div className="max-w-md mx-auto bg-red-500/10 border border-red-500/20 text-red-200 p-4 rounded-xl text-center">
             {geoError}
