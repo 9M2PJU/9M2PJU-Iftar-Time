@@ -114,37 +114,47 @@ export const useSolat = (latitude: number | null, longitude: number | null) => {
         const now = new Date();
         const prayers: PrayerTime[] = [];
 
-        // Convert API time strings (HH:mm:ss) to Date objects for comparison
-        // The API returns standard "HH:mm:ss" usually.
+        try {
+            (['fajr', 'syuruk', 'dhuhr', 'asr', 'maghrib', 'isha'] as const).forEach((key) => {
+                const timeStr = data[key];
+                if (!timeStr) return;
 
-        (['fajr', 'syuruk', 'dhuhr', 'asr', 'maghrib', 'isha'] as const).forEach((key) => {
-            const timeStr = data[key]; // "06:05:00"
-            if (!timeStr) return;
+                // Handle time parsing safely
+                let timeDate: Date;
+                try {
+                    timeDate = parse(timeStr, 'HH:mm:ss', now);
+                    // Check if invalid date
+                    if (isNaN(timeDate.getTime())) throw new Error("Invalid time");
+                } catch {
+                    try {
+                        timeDate = parse(timeStr, 'HH:mm', now);
+                    } catch (e) {
+                        console.warn(`Failed to parse time for ${key}: ${timeStr}`);
+                        return;
+                    }
+                }
 
-            const timeDate = parse(timeStr, 'HH:mm:ss', now);
-
-            prayers.push({
-                name: PRAYER_NAMES[key],
-                time: timeStr.substring(0, 5), // HH:mm
-                timestamp: timeDate.getTime(),
+                prayers.push({
+                    name: PRAYER_NAMES[key] || key,
+                    time: timeStr.length > 5 ? timeStr.substring(0, 5) : timeStr,
+                    timestamp: timeDate.getTime(),
+                });
             });
-        });
 
-        // Sort by time
-        prayers.sort((a, b) => a.timestamp - b.timestamp);
+            // Sort by time
+            prayers.sort((a, b) => a.timestamp - b.timestamp);
 
-        // Find next prayer
-        let next = prayers.find(p => p.timestamp > now.getTime());
+            // Find next prayer
+            let next = prayers.find(p => p.timestamp > now.getTime());
 
-        // If no prayer left today, next is Fajr tomorrow
-        if (!next) {
-            // In a real app, we would fetch tomorrow's data. 
-            // For now, let's approximate or just show Fajr (circular).
-            // Ideally fetch tomorrow.
-            next = { ...prayers[0], name: 'Fajr (Tomorrow)' };
+            if (!next && prayers.length > 0) {
+                next = { ...prayers[0], name: 'Fajr (Tomorrow)' };
+            }
+
+            setNextPrayer(next || null);
+        } catch (err) {
+            console.error("Error calculating next prayer:", err);
         }
-
-        setNextPrayer(next);
     };
 
     // Re-calculate next prayer every minute to keep it accurate
