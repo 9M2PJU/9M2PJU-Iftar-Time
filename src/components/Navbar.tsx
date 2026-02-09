@@ -30,11 +30,7 @@ export const Navbar: React.FC<NavbarProps> = ({ locationName = "Detecting Locati
                 </div>
             </div>
 
-            <div className="hidden md:flex items-center bg-slate-800/50 backdrop-blur-md rounded-full px-6 py-2 border border-white/5 space-x-8">
-                <a href="#" className="text-emerald-400 font-medium text-sm">Dashboard</a>
-                <a href="#" className="text-slate-300 hover:text-white transition text-sm">Dua Library</a>
-                <a href="#" className="text-slate-300 hover:text-white transition text-sm">Mosque Finder</a>
-            </div>
+
 
             <div className="flex items-center gap-4">
                 <button
