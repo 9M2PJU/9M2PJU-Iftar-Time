@@ -1,14 +1,8 @@
 
 import React from 'react';
-import { MapPin } from 'lucide-react';
+import React from 'react';
 
-
-interface NavbarProps {
-    locationName?: string;
-    onLocationClick?: () => void;
-}
-
-export const Navbar: React.FC<NavbarProps> = ({ locationName = "Detecting Location...", onLocationClick }) => {
+export const Navbar: React.FC = () => {
     return (
         <nav className="w-full p-4 flex items-center justify-between z-50 relative">
             {/* Centered Title with Logo */}
