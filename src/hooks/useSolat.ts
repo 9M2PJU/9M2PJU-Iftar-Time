@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { format, isAfter, isBefore, parse, addDays } from 'date-fns';
+import { format, parse } from 'date-fns';
 
 export interface PrayerTime {
     name: string;
@@ -20,14 +20,6 @@ export interface SolatData {
     asr: string;
     maghrib: string; // Iftar
     isha: string;
-}
-
-interface UseSolatReturn {
-    solatData: SolatData | null;
-    nextPrayer: PrayerTime | null;
-    loading: boolean;
-    error: string | null;
-    zone: string;
 }
 
 // Map API keys to display names

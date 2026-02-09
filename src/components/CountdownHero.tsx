@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { differenceInHours, differenceInMinutes, differenceInSeconds } from 'date-fns';
-import { motion } from 'framer-motion';
 
 interface CountdownHeroProps {
     iftarTime: Date | null;

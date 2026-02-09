@@ -85,7 +85,6 @@ const getIconForPrayer = (name: string) => {
 
 const formatTime12Hour = (time24: string) => {
     const [h, m] = time24.split(':').map(Number);
-    const suffix = h >= 12 ? 'PM' : 'AM';
     const h12 = h % 12 || 12;
     return `${h12}:${m.toString().padStart(2, '0')}`;
 };

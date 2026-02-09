@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { Menu, MapPin, Bell, User } from 'lucide-react';
-import clsx from 'clsx';
+import { MapPin, Bell, User } from 'lucide-react';
+
 
 interface NavbarProps {
     locationName?: string;

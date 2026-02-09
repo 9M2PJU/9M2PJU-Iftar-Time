@@ -1,5 +1,5 @@
 
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useGeoLocation } from './hooks/useGeoLocation';
 import { useSolat } from './hooks/useSolat';
 import { Navbar } from './components/Navbar';
@@ -22,7 +22,7 @@ const parseTime = (timeStr: string, baseDate: Date) => {
 
 function App() {
   const { location, error: geoError, loading: geoLoading } = useGeoLocation();
-  const { solatData, nextPrayer, loading: solatLoading, zone } = useSolat(
+  const { solatData, nextPrayer, zone } = useSolat(
     location?.latitude || null,
     location?.longitude || null
   );
@@ -34,7 +34,6 @@ function App() {
 
   const prayerList = useMemo(() => {
     if (!solatData) return [];
-    const now = new Date();
 
     // Map API data to our PrayerGrid format
     const list = [
