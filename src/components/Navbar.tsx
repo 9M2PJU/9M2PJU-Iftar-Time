@@ -4,7 +4,7 @@ import React from 'react';
 
 export const Navbar: React.FC = () => {
     return (
-        <nav className="w-full p-4 flex items-center justify-center z-50 relative">
+        <nav className="sticky top-0 w-full p-4 flex items-center justify-center z-50 transition-all duration-300 backdrop-blur-md bg-[#0f172a]/80 border-b border-white/5 supports-[backdrop-filter]:bg-[#0f172a]/60">
             {/* Centered Title with Logo */}
             <div className="flex flex-col items-center w-full">
                 <div className="flex items-center gap-3">
