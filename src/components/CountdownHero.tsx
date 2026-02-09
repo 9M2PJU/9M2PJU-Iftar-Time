@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { differenceInHours, differenceInMinutes, differenceInSeconds, format } from 'date-fns';
+import { MapPin } from 'lucide-react';
 
 interface CountdownHeroProps {
     iftarTime: Date | null;
@@ -44,10 +45,17 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, hijriDa
             <div className="relative z-10 text-center space-y-6 md:space-y-8 max-w-4xl mx-auto">
 
                 {/* Header Badge */}
-                <div className="animate-in fade-in slide-in-from-top-4 duration-700 delay-100">
+                <div className="animate-in fade-in slide-in-from-top-4 duration-700 delay-100 flex flex-col items-center gap-3">
                     <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium tracking-wide shadow-lg shadow-emerald-500/5 backdrop-blur-sm">
                         {hijriDate || format(new Date(), 'd MMMM yyyy')}
                     </span>
+
+                    {locationName && (
+                        <div className="flex items-center gap-1.5 text-slate-400 text-xs md:text-sm font-medium tracking-wider uppercase animate-in fade-in slide-in-from-top-2 duration-700 delay-200">
+                            <MapPin className="w-3.5 h-3.5 text-emerald-500/50" />
+                            <span>{locationName}</span>
+                        </div>
+                    )}
                 </div>
             </div>
 
