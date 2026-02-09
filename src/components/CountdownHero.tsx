@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { differenceInHours, differenceInMinutes, differenceInSeconds } from 'date-fns';
+import { differenceInHours, differenceInMinutes, differenceInSeconds, format } from 'date-fns';
 
 interface CountdownHeroProps {
     iftarTime: Date | null;
@@ -8,7 +8,7 @@ interface CountdownHeroProps {
     hijriDate?: string;
 }
 
-export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, locationName = "Kuala Lumpur", hijriDate }) => {
+export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, hijriDate }) => {
     const [timeLeft, setTimeLeft] = useState<{ h: number; m: number; s: number } | null>(null);
 
     useEffect(() => {
