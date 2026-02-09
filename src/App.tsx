@@ -59,28 +59,27 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0f172a] text-white selection:bg-emerald-500/30">
+    <div className="h-screen w-full bg-[#0f172a] text-white selection:bg-emerald-500/30 flex flex-col overflow-x-hidden md:overflow-hidden">
       <Navbar locationName={zone || "Locating..."} />
 
-      <main className="container mx-auto px-4 pb-20">
+      <main className="flex-1 container mx-auto px-4 flex flex-col justify-center items-center w-full max-w-7xl pb-8 md:pb-0 gap-8 md:gap-12">
         {geoError && (
-          <div className="max-w-md mx-auto mt-4 bg-red-500/10 border border-red-500/20 text-red-200 p-4 rounded-xl text-center">
+          <div className="max-w-md mx-auto bg-red-500/10 border border-red-500/20 text-red-200 p-4 rounded-xl text-center">
             {geoError}
           </div>
         )}
 
-        {/* Hero Section */}
-        <CountdownHero iftarTime={iftarTime} locationName={zone} />
+        {/* Hero Section - Scaled for fit */}
+        <div className="w-full flex justify-center">
+          <CountdownHero iftarTime={iftarTime} locationName={zone} />
+        </div>
 
-        {/* Prayer Grid */}
+        {/* Prayer Grid - Scaled for fit */}
         {solatData && (
-          <div className="mt-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+          <div className="w-full animate-in fade-in slide-in-from-bottom-8 duration-700">
             <PrayerGrid prayers={prayerList} />
           </div>
         )}
-
-
-
       </main>
     </div>
   );
