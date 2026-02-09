@@ -78,8 +78,36 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
                 <TimeUnit value={timeLeft.s} label="SECONDS" />
             </div>
 
-            <div className="bg-emerald-900/30 text-emerald-300 px-4 py-1.5 rounded-full text-xs font-medium tracking-wider mt-5 border border-emerald-500/20">
-                FAST PROGRESS: {progress.toFixed(1)}% COMPLETE
+            {/* Animated Progress Bar */}
+            <div className="w-full max-w-xs md:max-w-sm mt-6 md:mt-8">
+                <div className="flex justify-between text-[10px] text-slate-400 font-medium tracking-wider mb-1.5 uppercase">
+                    <span>Fajr</span>
+                    <span>{progress.toFixed(0)}%</span>
+                    <span>Maghrib</span>
+                </div>
+                <div className="relative h-3 bg-slate-800/50 rounded-full overflow-visible border border-white/5">
+                    {/* Progress Fill */}
+                    <div
+                        className="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-full transition-all duration-1000 ease-out"
+                        style={{ width: `${progress}%` }}
+                    />
+
+                    {/* Running Person Emoji Marker */}
+                    <div
+                        className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 transition-all duration-1000 ease-out z-10 flex flex-col items-center"
+                        style={{ left: `${progress}%` }}
+                    >
+                        <div className="relative">
+                            <span className="text-2xl md:text-3xl filter drop-shadow-lg transform -scale-x-100 inline-block animate-bounce-slight">🏃</span>
+                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-1 bg-black/20 blur-sm rounded-full" />
+                        </div>
+                    </div>
+
+                    {/* Food Target at the end */}
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 z-0">
+                        <span className="text-xl md:text-2xl filter drop-shadow-lg">🍱</span>
+                    </div>
+                </div>
             </div>
         </div>
     );
