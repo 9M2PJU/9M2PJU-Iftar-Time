@@ -16,7 +16,7 @@ interface PrayerGridProps {
 
 export const PrayerGrid: React.FC<PrayerGridProps> = ({ prayers }) => {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 w-full max-w-6xl mx-auto px-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 w-full max-w-4xl mx-auto px-4">
             {prayers.map((prayer) => (
                 <PrayerCard key={prayer.name} prayer={prayer} />
             ))}
@@ -28,33 +28,34 @@ const PrayerCard = ({ prayer }: { prayer: PrayerTime }) => {
     const Icon = getIconForPrayer(prayer.name);
 
     return (
+    return (
         <div className={clsx(
-            "relative p-6 rounded-3xl border transition-all duration-300 overflow-hidden group",
+            "relative p-4 rounded-2xl border transition-all duration-300 overflow-hidden group",
             prayer.isNext
                 ? "bg-slate-900 border-emerald-500 shadow-lg shadow-emerald-500/10"
                 : "bg-slate-800/40 border-white/5 hover:bg-slate-800/60"
         )}>
             {prayer.isNext && (
-                <div className="absolute top-4 right-4 animate-pulse">
-                    <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]" />
+                <div className="absolute top-3 right-3 animate-pulse">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]" />
                 </div>
             )}
 
-            <div className="flex justify-between items-start mb-6">
-                <Icon className={clsx("w-6 h-6", prayer.isNext ? "text-emerald-400" : "text-slate-400")} />
+            <div className="flex justify-between items-center mb-3">
+                <Icon className={clsx("w-5 h-5", prayer.isNext ? "text-emerald-400" : "text-slate-400")} />
                 {prayer.isNext && (
-                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500 text-slate-900">NEXT</span>
+                    <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-500 text-slate-900">NEXT</span>
                 )}
                 {!prayer.isNext && prayer.time && (
-                    <span className="px-2 py-1 rounded text-[10px] font-medium bg-slate-700/50 text-slate-400 uppercase">
+                    <span className="px-1.5 py-0.5 rounded text-[9px] font-medium bg-slate-700/50 text-slate-400 uppercase">
                         {parseInt(prayer.time) >= 12 ? 'PM' : 'AM'}
                     </span>
                 )}
             </div>
 
             <div>
-                <h3 className="text-xs font-semibold text-slate-400 tracking-wider uppercase mb-1">{prayer.name}</h3>
-                <p className={clsx("text-2xl font-bold tracking-tight", prayer.isNext ? "text-white" : "text-slate-200")}>
+                <h3 className="text-[10px] font-semibold text-slate-400 tracking-wider uppercase mb-0.5">{prayer.name}</h3>
+                <p className={clsx("text-xl font-bold tracking-tight", prayer.isNext ? "text-white" : "text-slate-200")}>
                     {formatTime12Hour(prayer.time)}
                 </p>
                 {prayer.name === 'Maghrib' && prayer.isNext && (
