@@ -32,5 +32,5 @@ export default defineConfig({
       }
     })
   ],
-  base: '/9M2PJU-Iftar-Time/', // For GitHub Pages
+  base: '/', // For Custom Domain iftar.hamradio.my
 })
