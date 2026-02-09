@@ -4,10 +4,11 @@ import { differenceInHours, differenceInMinutes, differenceInSeconds } from 'dat
 
 interface CountdownHeroProps {
     iftarTime: Date | null;
-    locationName: string;
+    locationName?: string;
+    hijriDate?: string;
 }
 
-export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime }) => {
+export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, locationName = "Kuala Lumpur", hijriDate }) => {
     const [timeLeft, setTimeLeft] = useState<{ h: number; m: number; s: number } | null>(null);
 
     useEffect(() => {
@@ -40,8 +41,14 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime }) => {
                 FAST PROGRESS: 75% COMPLETE
             </div>
 
-            <div className="text-slate-400 text-sm md:text-base mb-2 font-medium tracking-wide">
-                9 Ramadan 1445 AH
+            <div className="relative z-10 text-center space-y-6 md:space-y-8 max-w-4xl mx-auto">
+
+                {/* Header Badge */}
+                <div className="animate-in fade-in slide-in-from-top-4 duration-700 delay-100">
+                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium tracking-wide shadow-lg shadow-emerald-500/5 backdrop-blur-sm">
+                        {hijriDate || format(new Date(), 'd MMMM yyyy')}
+                    </span>
+                </div>
             </div>
 
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 tracking-tight">

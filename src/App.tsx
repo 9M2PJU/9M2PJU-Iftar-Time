@@ -71,7 +71,7 @@ function App() {
 
         {/* Hero Section - Scaled for fit */}
         <div className="w-full flex justify-center">
-          <CountdownHero iftarTime={iftarTime} locationName={zone} />
+          <CountdownHero iftarTime={iftarTime} locationName={zone} hijriDate={solatData?.hijri} />
         </div>
 
         {/* Prayer Grid - Scaled for fit */}
