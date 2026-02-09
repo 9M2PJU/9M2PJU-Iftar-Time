@@ -63,7 +63,7 @@ function App() {
     <div className="min-h-[100dvh] md:h-screen w-full bg-[#0f172a] text-white selection:bg-emerald-500/30 flex flex-col relative pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] md:overflow-hidden overflow-y-auto">
       <Navbar />
 
-      <main className="flex-1 container mx-auto px-4 flex flex-col justify-center items-center w-full max-w-5xl py-6 gap-6 md:gap-8">
+      <main className="flex-1 container mx-auto px-4 flex flex-col justify-center items-center w-full max-w-5xl py-6 md:py-2 gap-6 md:gap-4">
         {geoError && (
           <div className="max-w-md mx-auto bg-red-500/10 border border-red-500/20 text-red-200 p-4 rounded-xl text-center">
             {geoError}
