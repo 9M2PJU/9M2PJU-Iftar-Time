@@ -28,7 +28,6 @@ const PrayerCard = ({ prayer }: { prayer: PrayerTime }) => {
     const Icon = getIconForPrayer(prayer.name);
 
     return (
-    return (
         <div className={clsx(
             "relative p-4 rounded-2xl border transition-all duration-300 overflow-hidden group",
             prayer.isNext
