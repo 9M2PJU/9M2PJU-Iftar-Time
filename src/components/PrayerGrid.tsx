@@ -45,7 +45,7 @@ const PrayerCard = ({ prayer }: { prayer: PrayerTime }) => {
                 {prayer.isNext && (
                     <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500 text-slate-900">NEXT</span>
                 )}
-                {!prayer.isNext && (
+                {!prayer.isNext && prayer.time && (
                     <span className="px-2 py-1 rounded text-[10px] font-medium bg-slate-700/50 text-slate-400 uppercase">
                         {parseInt(prayer.time) >= 12 ? 'PM' : 'AM'}
                     </span>
