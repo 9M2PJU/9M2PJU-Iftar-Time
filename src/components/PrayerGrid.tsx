@@ -29,7 +29,7 @@ const PrayerCard = ({ prayer }: { prayer: PrayerTime }) => {
 
     return (
         <div className={clsx(
-            "relative p-4 rounded-2xl border transition-all duration-300 overflow-hidden group",
+            "relative p-3 md:p-4 rounded-2xl border transition-all duration-300 overflow-hidden group",
             prayer.isNext
                 ? "bg-slate-900 border-emerald-500 shadow-xl shadow-emerald-500/20 scale-[1.02]"
                 : "bg-slate-800/40 border-white/5 hover:bg-slate-800/60"
