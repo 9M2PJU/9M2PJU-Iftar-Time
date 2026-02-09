@@ -13,10 +13,12 @@ A beautiful, high-performance Progressive Web App (PWA) designed to provide accu
 
 - **Dynamic Iftar Countdown**: Large, easy-to-read countdown timer to Maghrib.
 - **Smart Geolocation**: Automatically detects your zone and fetches official JAKIM data via `waktusolat.app`.
-- **Prayer Grid**: Clean visualization of all 5 daily prayers + Syuruk.
+- **Descriptive Zone Names**: Displays full district names (e.g., *Gombak, Petaling*) instead of cryptic codes.
+- **Native Mobile Feel**: Designed with safe-area insets, sticky headers, and touch-optimized scale effects for a true app-like experience.
+- **Dashboard Layout**: Perfect "no-scroll" fit on desktop screens, naturally balanced for large displays.
+- **Prayer Grid**: Clean visualization of all 5 daily prayers + Syuruk with active prayer highlighting.
 - **Hijri Date**: Displays the current Islamic date (e.g., *21 Sha'ban 1447*).
 - **Offline PWA**: Installable on iOS/Android, works without internet after first load.
-- **Perfect Fit Layout**: Optimized for desktop and mobile screens (no scrollbar on standard views).
 
 ## 🛠️ Tech Stack
 
