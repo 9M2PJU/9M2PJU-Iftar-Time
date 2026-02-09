@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { format } from 'date-fns';
+import { getZoneName } from '../utils/zones';
 
 export interface PrayerTime {
     name: string;
@@ -82,14 +83,14 @@ export const useSolat = (latitude: number | null, longitude: number | null) => {
 
                     if (todayData) {
                         setSolatData(todayData);
-                        setZone(response.data.zone || 'Detected Location');
+                        setZone(getZoneName(response.data.zone) || 'Detected Location');
                         calculateNextPrayer(todayData);
                     } else {
                         // Fallback to first element if date matching fails (edge case) or handle error
                         // Maybe the API ensures structure.
                         if (response.data.prayers[0]) {
                             setSolatData(response.data.prayers[0]);
-                            setZone(response.data.zone);
+                            setZone(getZoneName(response.data.zone));
                             calculateNextPrayer(response.data.prayers[0]);
                         }
                     }
