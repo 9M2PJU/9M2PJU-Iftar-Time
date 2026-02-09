@@ -52,21 +52,21 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
             <div className="relative z-10 text-center space-y-4 md:space-y-4 max-w-4xl mx-auto">
 
                 {/* Header Badge */}
-                <div className="animate-in fade-in slide-in-from-top-4 duration-700 delay-100 flex flex-col items-center gap-3">
+                <div className="animate-in fade-in slide-in-from-top-4 duration-700 delay-100 flex flex-col items-center gap-6">
                     <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium tracking-wide shadow-lg shadow-emerald-500/5 backdrop-blur-sm">
                         {hijriDate || format(new Date(), 'd MMMM yyyy')}
                     </span>
 
                     {locationName && (
-                        <div className="flex items-center gap-1.5 text-slate-400 text-xs md:text-sm font-medium tracking-wider uppercase animate-in fade-in slide-in-from-top-2 duration-700 delay-200">
-                            <MapPin className="w-3.5 h-3.5 text-emerald-500/50" />
+                        <div className="flex items-center gap-1.5 text-slate-400 text-xs md:text-sm font-medium tracking-wider uppercase animate-in fade-in slide-in-from-top-2 duration-700 delay-200 px-4 text-center leading-relaxed">
+                            <MapPin className="w-3.5 h-3.5 text-emerald-500/50 shrink-0" />
                             <span>{locationName}</span>
                         </div>
                     )}
                 </div>
             </div>
 
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 md:mb-6 tracking-tight">
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 md:mb-6 mt-8 md:mt-10 tracking-tight">
                 Time until <span className="text-emerald-400">Iftar</span>
             </h2>
 
