@@ -26,7 +26,7 @@ export const Navbar: React.FC<NavbarProps> = ({ locationName = "Detecting Locati
                             9M2PJU Iftar Time
                         </h1>
                     </div>
-                    <p className="text-xs text-slate-400 tracking-wider">MODERN COMPANION</p>
+                    <p className="text-xs text-slate-400 tracking-wider">MODERN COMPANION DURING RAMADHAN</p>
                 </div>
             </div>
 
