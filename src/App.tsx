@@ -21,6 +21,11 @@ function App() {
     return new Date(solatData.maghrib * 1000);
   }, [solatData]);
 
+  const fajrTime = useMemo(() => {
+    if (!solatData) return null;
+    return new Date(solatData.fajr * 1000);
+  }, [solatData]);
+
   const prayerList = useMemo(() => {
     if (!solatData) return [];
 
@@ -74,6 +79,7 @@ function App() {
         <div className="w-full flex justify-center">
           <CountdownHero
             iftarTime={iftarTime}
+            fajrTime={fajrTime}
             locationName={zone}
             hijriDate={solatData?.hijri ? formatHijriDate(solatData.hijri) : undefined}
           />

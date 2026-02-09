@@ -5,18 +5,27 @@ import { MapPin } from 'lucide-react';
 
 interface CountdownHeroProps {
     iftarTime: Date | null;
+    fajrTime: Date | null;
     locationName?: string;
     hijriDate?: string;
 }
 
-export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, locationName, hijriDate }) => {
+export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTime, locationName, hijriDate }) => {
     const [timeLeft, setTimeLeft] = useState<{ h: number; m: number; s: number } | null>(null);
+    const [progress, setProgress] = useState<number>(0);
 
     useEffect(() => {
-        if (!iftarTime) return;
+        if (!iftarTime || !fajrTime) return;
 
         const interval = setInterval(() => {
             const now = new Date();
+
+            // Progress Calculation
+            const totalDuration = iftarTime.getTime() - fajrTime.getTime();
+            const elapsed = now.getTime() - fajrTime.getTime();
+            const pct = Math.min(100, Math.max(0, (elapsed / totalDuration) * 100));
+            setProgress(pct);
+
             if (now >= iftarTime) {
                 setTimeLeft({ h: 0, m: 0, s: 0 }); // Iftar time reached!
                 return;
@@ -30,7 +39,7 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, locatio
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [iftarTime]);
+    }, [iftarTime, fajrTime]);
 
     if (!timeLeft) return <div className="animate-pulse h-48 w-full bg-slate-800/50 rounded-3xl" />;
 
@@ -70,7 +79,7 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, locatio
             </div>
 
             <div className="bg-emerald-900/30 text-emerald-300 px-4 py-1.5 rounded-full text-xs font-medium tracking-wider mt-5 border border-emerald-500/20">
-                FAST PROGRESS: 75% COMPLETE
+                FAST PROGRESS: {progress.toFixed(1)}% COMPLETE
             </div>
         </div>
     );
