@@ -70,7 +70,6 @@ export const useGeoLocation = () => {
             if (!mounted) return;
 
             let errorMessage = 'An unknown error occurred.';
-            let shouldRetry = false;
 
             switch (error.code) {
                 case error.PERMISSION_DENIED:
@@ -81,7 +80,6 @@ export const useGeoLocation = () => {
                     break;
                 case error.TIMEOUT:
                     errorMessage = 'Location request timed out. Using last known location if available.';
-                    shouldRetry = true;
                     break;
             }
 
