@@ -111,28 +111,18 @@ export const useSolat = (latitude: number | null, longitude: number | null) => {
 
         try {
             (['fajr', 'syuruk', 'dhuhr', 'asr', 'maghrib', 'isha'] as const).forEach((key) => {
-                const timeStr = data[key];
-                if (!timeStr) return;
+                const timestamp = data[key];
+                if (!timestamp) return;
 
-                // Handle time parsing safely
-                let timeDate: Date;
-                try {
-                    timeDate = parse(timeStr, 'HH:mm:ss', now);
-                    // Check if invalid date
-                    if (isNaN(timeDate.getTime())) throw new Error("Invalid time");
-                } catch {
-                    try {
-                        timeDate = parse(timeStr, 'HH:mm', now);
-                    } catch (e) {
-                        console.warn(`Failed to parse time for ${key}: ${timeStr}`);
-                        return;
-                    }
-                }
+                // API returns seconds, convert to ms
+                const timeMs = timestamp * 1000;
+                const dateObj = new Date(timeMs);
+                const timeStr = format(dateObj, 'HH:mm');
 
                 prayers.push({
                     name: PRAYER_NAMES[key] || key,
-                    time: timeStr.length > 5 ? timeStr.substring(0, 5) : timeStr,
-                    timestamp: timeDate.getTime(),
+                    time: timeStr,
+                    timestamp: timeMs,
                 });
             });
 

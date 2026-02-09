@@ -5,20 +5,7 @@ import { useSolat } from './hooks/useSolat';
 import { Navbar } from './components/Navbar';
 import { CountdownHero } from './components/CountdownHero';
 import { PrayerGrid } from './components/PrayerGrid';
-import { parse } from 'date-fns';
-
-const parseTime = (timeStr: string, baseDate: Date) => {
-  try {
-    return parse(timeStr, 'HH:mm:ss', baseDate);
-  } catch {
-    try {
-      return parse(timeStr, 'HH:mm', baseDate);
-    } catch (e) {
-      console.error("Time parse error", timeStr, e);
-      return baseDate;
-    }
-  }
-};
+import { format } from 'date-fns';
 
 function App() {
   const { location, error: geoError, loading: geoLoading } = useGeoLocation();
