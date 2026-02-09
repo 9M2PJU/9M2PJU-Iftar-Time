@@ -5,7 +5,7 @@ import { Sun, Moon, CloudSun, Sunrise } from 'lucide-react';
 
 interface PrayerTime {
     name: string;
-    time: string; // HH:mm format
+    time: string | undefined | null; // HH:mm format
     isNext?: boolean;
     isPast?: boolean;
 }
@@ -83,8 +83,10 @@ const getIconForPrayer = (name: string) => {
     }
 };
 
-const formatTime12Hour = (time24: string) => {
+const formatTime12Hour = (time24: string | undefined | null) => {
+    if (!time24 || typeof time24 !== 'string') return '--:--';
     const [h, m] = time24.split(':').map(Number);
+    if (isNaN(h) || isNaN(m)) return time24;
     const h12 = h % 12 || 12;
     return `${h12}:${m.toString().padStart(2, '0')}`;
 };
