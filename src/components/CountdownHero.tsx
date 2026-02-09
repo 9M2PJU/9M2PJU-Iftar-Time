@@ -57,7 +57,7 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, locatio
                 </div>
             </div>
 
-            <h2 className="text-5xl md:text-7xl font-bold text-white mb-12 tracking-tight">
+            <h2 className="text-4xl md:text-7xl font-bold text-white mb-8 md:mb-12 tracking-tight">
                 Time until <span className="text-emerald-400">Iftar</span>
             </h2>
 

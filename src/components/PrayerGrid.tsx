@@ -31,12 +31,12 @@ const PrayerCard = ({ prayer }: { prayer: PrayerTime }) => {
         <div className={clsx(
             "relative p-4 rounded-2xl border transition-all duration-300 overflow-hidden group",
             prayer.isNext
-                ? "bg-slate-900 border-emerald-500 shadow-lg shadow-emerald-500/10"
+                ? "bg-slate-900 border-emerald-500 shadow-xl shadow-emerald-500/20 scale-[1.02]"
                 : "bg-slate-800/40 border-white/5 hover:bg-slate-800/60"
         )}>
             {prayer.isNext && (
                 <div className="absolute top-3 right-3 animate-pulse">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]" />
+                    <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_15px_#34d399]" />
                 </div>
             )}
 
