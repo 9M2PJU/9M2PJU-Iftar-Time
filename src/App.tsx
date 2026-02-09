@@ -6,6 +6,7 @@ import { Navbar } from './components/Navbar';
 import { CountdownHero } from './components/CountdownHero';
 import { PrayerGrid } from './components/PrayerGrid';
 import { format } from 'date-fns';
+import { formatHijriDate } from './utils/hijri';
 
 function App() {
   const { location, error: geoError, loading: geoLoading } = useGeoLocation();
@@ -71,7 +72,11 @@ function App() {
 
         {/* Hero Section - Scaled for fit */}
         <div className="w-full flex justify-center">
-          <CountdownHero iftarTime={iftarTime} locationName={zone} hijriDate={solatData?.hijri} />
+          <CountdownHero
+            iftarTime={iftarTime}
+            locationName={zone}
+            hijriDate={solatData?.hijri ? formatHijriDate(solatData.hijri) : undefined}
+          />
         </div>
 
         {/* Prayer Grid - Scaled for fit */}
