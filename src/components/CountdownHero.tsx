@@ -38,9 +38,7 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, locatio
         <div className="relative w-full flex flex-col items-center justify-center py-6 md:py-10">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
 
-            <div className="bg-emerald-900/30 text-emerald-300 px-4 py-1.5 rounded-full text-xs font-medium tracking-wider mb-6 border border-emerald-500/20">
-                FAST PROGRESS: 75% COMPLETE
-            </div>
+
 
             <div className="relative z-10 text-center space-y-6 md:space-y-8 max-w-4xl mx-auto">
 
