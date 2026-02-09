@@ -60,7 +60,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-[#0f172a] text-white selection:bg-emerald-500/30 flex flex-col relative">
+    <div className="h-screen w-full bg-[#0f172a] text-white selection:bg-emerald-500/30 flex flex-col overflow-x-hidden md:overflow-hidden relative">
       <Navbar locationName={zone || "Locating..."} />
 
       <main className="flex-1 container mx-auto px-4 flex flex-col justify-center items-center w-full max-w-7xl py-8 gap-8 md:gap-10">

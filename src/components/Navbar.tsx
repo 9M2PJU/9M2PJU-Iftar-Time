@@ -44,13 +44,6 @@ export const Navbar: React.FC<NavbarProps> = ({ locationName = "Detecting Locati
                     <MapPin className="w-4 h-4 text-emerald-400" />
                     <span className="max-w-[120px] truncate">{locationName}</span>
                 </button>
-
-                <button className="w-10 h-10 rounded-full bg-slate-800/50 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700/50 transition border border-white/5">
-                    <Bell className="w-5 h-5" />
-                </button>
-                <button className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 border border-emerald-500/30">
-                    <User className="w-5 h-5" />
-                </button>
             </div>
         </nav>
     );
