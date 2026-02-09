@@ -1,25 +1,25 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { format, parse } from 'date-fns';
+import { format } from 'date-fns';
 
 export interface PrayerTime {
     name: string;
-    time: string; // HH:mm:ss
+    time: string; // HH:mm format for display
     timestamp: number;
 }
 
 export interface SolatData {
     hijri: string;
     date: string;
-    day: string;
-    imsak: string;
-    fajr: string;
-    syuruk: string;
-    dhuhr: string;
-    asr: string;
-    maghrib: string; // Iftar
-    isha: string;
+    day: number;
+    imsak: number;
+    fajr: number;
+    syuruk: number;
+    dhuhr: number;
+    asr: number;
+    maghrib: number; // Iftar
+    isha: number;
 }
 
 // Map API keys to display names
@@ -50,12 +50,7 @@ export const useSolat = (latitude: number | null, longitude: number | null) => {
                     `https://api.waktusolat.app/v2/solat/gps/${latitude}/${longitude}`
                 );
 
-                console.log("API Response:", response.data);
-
                 if (response.data && response.data.prayers && response.data.prayers.length > 0) {
-                    // The API returns an array of prayer times for the month/year.
-                    // We need to find today's entry.
-                    // Note: The API structure might need adjustment based on actual response.
                     // Assuming response.data.prayers is an array of objects with day/hijri/fajr etc.
 
                     // However, let's look at the specific endpoint structure provided in the prompt:

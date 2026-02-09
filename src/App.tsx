@@ -29,26 +29,30 @@ function App() {
 
   const iftarTime = useMemo(() => {
     if (!solatData) return null;
-    return parseTime(solatData.maghrib, new Date());
+    // solatData.maghrib is a timestamp (seconds)
+    return new Date(solatData.maghrib * 1000);
   }, [solatData]);
 
   const prayerList = useMemo(() => {
     if (!solatData) return [];
 
+    // Helper to format timestamp to HH:mm
+    const formatTime = (timestamp: number) => {
+      return format(new Date(timestamp * 1000), 'HH:mm');
+    };
+
     // Map API data to our PrayerGrid format
     const list = [
-      { name: 'Fajr', time: solatData.fajr },
-      { name: 'Syuruk', time: solatData.syuruk }, // Optional to show
-      { name: 'Dhuhr', time: solatData.dhuhr },
-      { name: 'Asr', time: solatData.asr },
-      { name: 'Maghrib', time: solatData.maghrib },
-      { name: 'Isha', time: solatData.isha },
+      { name: 'Fajr', time: formatTime(solatData.fajr) },
+      { name: 'Syuruk', time: formatTime(solatData.syuruk) },
+      { name: 'Dhuhr', time: formatTime(solatData.dhuhr) },
+      { name: 'Asr', time: formatTime(solatData.asr) },
+      { name: 'Maghrib', time: formatTime(solatData.maghrib) },
+      { name: 'Isha', time: formatTime(solatData.isha) },
     ];
 
     return list.map(p => {
-      // Determine if next. Note: this is a simple check. nextPrayer from hook might be better.
-      // But for visual grid, we want to highlight the *next* or *current* relevant one.
-      // Let's use the nextPrayer from hook to decide which card gets highlighted/glow.
+      // Determine if next. 
       const isNext = nextPrayer?.name === p.name || (p.name === 'Maghrib' && nextPrayer?.name === 'Maghrib');
 
       return {
