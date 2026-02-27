@@ -1,10 +1,11 @@
 
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useGeoLocation } from './hooks/useGeoLocation';
 import { useSolat } from './hooks/useSolat';
 import { Navbar } from './components/Navbar';
 import { CountdownHero } from './components/CountdownHero';
 import { PrayerGrid } from './components/PrayerGrid';
+import { AboutModal } from './components/AboutModal';
 import { format } from 'date-fns';
 import { formatHijriDate } from './utils/hijri';
 
@@ -14,6 +15,17 @@ function App() {
     location?.latitude || null,
     location?.longitude || null
   );
+
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
+
+  useEffect(() => {
+    // Check if user has visited before
+    const hasVisited = localStorage.getItem('visited_9m2pju_iftar');
+    if (!hasVisited) {
+      setIsAboutModalOpen(true);
+      localStorage.setItem('visited_9m2pju_iftar', 'true');
+    }
+  }, []);
 
   const iftarTime = useMemo(() => {
     if (!solatData) return null;
@@ -96,17 +108,21 @@ function App() {
         <footer className="w-full text-center py-4 mt-auto">
           <p className="text-slate-500 text-xs font-medium tracking-wide">
             Made with <span className="text-red-500 animate-pulse">❤️</span> by{' '}
-            <a
-              href="https://hamradio.my"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-emerald-500 hover:text-emerald-400 transition-colors uppercase"
+            <button
+              onClick={() => setIsAboutModalOpen(true)}
+              className="text-emerald-500 hover:text-emerald-400 transition-colors uppercase font-bold"
             >
               9M2PJU
-            </a>
+            </button>
           </p>
         </footer>
       </main>
+
+      {/* Welcome Popup */}
+      <AboutModal
+        isOpen={isAboutModalOpen}
+        onClose={() => setIsAboutModalOpen(false)}
+      />
     </div>
   );
 }
