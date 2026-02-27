@@ -15,9 +15,21 @@ export const Navbar: React.FC<NavbarProps> = ({ onAboutClick }) => {
             {/* Centered Title with Logo */}
             <div className="flex flex-col items-center flex-1">
                 <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center shadow-lg shadow-emerald-500/20">
-                        <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-white" stroke="currentColor" strokeWidth="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                    <div className="w-9 h-9 bg-emerald-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20 ring-1 ring-white/20">
+                        <svg viewBox="0 0 512 512" fill="none" className="w-6 h-6 text-white" stroke="currentColor" strokeWidth="12">
+                            {/* Official Crescent & Dome Paths from icon.svg */}
+                            <path
+                                d="M250 50 C 200 50 150 100 150 200 C 150 350 280 450 400 400 C 350 450 200 420 200 200 C 200 100 250 50 250 50 Z"
+                                fill="currentColor"
+                                stroke="none"
+                            />
+                            <path
+                                d="M300 350 L 300 200 A 50 50 0 0 1 400 200 L 400 350 Z"
+                                stroke="currentColor"
+                                strokeWidth="25"
+                                strokeLinecap="round"
+                            />
+                            <circle cx="350" cy="160" r="20" fill="currentColor" stroke="none" />
                         </svg>
                     </div>
                     <h1 className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">

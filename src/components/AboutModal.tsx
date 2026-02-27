@@ -57,9 +57,21 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
                         {/* Content Area */}
                         <div className="p-5 md:p-6 pt-2">
                             <div className="flex flex-col items-center text-center -mt-10 mb-4">
-                                <div className="w-14 h-14 bg-emerald-500 rounded-2xl flex items-center justify-center shadow-xl shadow-emerald-500/20 mb-3 border-4 border-[#0f172a]">
-                                    <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8 text-white" stroke="currentColor" strokeWidth="2">
-                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                                <div className="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-emerald-500/30 mb-3 border-4 border-[#0f172a]">
+                                    <svg viewBox="0 0 512 512" fill="none" className="w-10 h-10 text-white" stroke="currentColor" strokeWidth="12">
+                                        {/* Official Crescent & Dome Paths */}
+                                        <path
+                                            d="M250 50 C 200 50 150 100 150 200 C 150 350 280 450 400 400 C 350 450 200 420 200 200 C 200 100 250 50 250 50 Z"
+                                            fill="currentColor"
+                                            stroke="none"
+                                        />
+                                        <path
+                                            d="M300 350 L 300 200 A 50 50 0 0 1 400 200 L 400 350 Z"
+                                            stroke="currentColor"
+                                            strokeWidth="25"
+                                            strokeLinecap="round"
+                                        />
+                                        <circle cx="350" cy="160" r="20" fill="currentColor" stroke="none" />
                                     </svg>
                                 </div>
                                 <h2 className="text-xl font-bold text-white mb-0.5">9M2PJU Iftar Time</h2>
