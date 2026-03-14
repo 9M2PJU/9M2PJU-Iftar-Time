@@ -66,11 +66,11 @@ function App() {
 
   return (
     <div className="h-[100dvh] w-full bg-[#0f172a] text-white selection:bg-emerald-500/30 flex flex-col items-center relative pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] overflow-hidden">
-      <div className="flex flex-col w-full max-w-7xl flex-1 overflow-hidden">
+      <div className="flex flex-col w-full max-w-7xl flex-1 h-full overflow-hidden">
         <Navbar />
 
-        <main className="flex-1 w-full overflow-y-auto px-4 scrollbar-none">
-          <div className="min-h-full w-full flex flex-col items-center justify-center py-4 sm:py-6 md:py-8 gap-6 sm:gap-10 md:gap-16">
+        <main className="flex-1 w-full overflow-y-auto px-4 scrollbar-none flex flex-col">
+          <div className="min-h-full w-full flex flex-col items-center justify-center py-4 sm:py-6 md:py-8 gap-4 sm:gap-10 md:gap-16">
           {geoError && (
             <div className="max-w-md mx-auto bg-red-500/10 border border-red-500/20 text-red-200 p-4 rounded-xl text-center">
               {geoError}

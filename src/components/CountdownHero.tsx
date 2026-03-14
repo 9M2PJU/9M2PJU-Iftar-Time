@@ -44,8 +44,8 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
     if (!timeLeft) return <div className="animate-pulse h-48 md:h-64 w-full bg-slate-800/50 rounded-3xl" />;
 
     return (
-        <div className="relative w-full flex flex-col items-center justify-center py-2 sm:py-6 md:py-10">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[500px] md:w-[800px] h-[280px] sm:h-[500px] md:h-[800px] bg-emerald-500/10 rounded-full blur-[60px] sm:blur-[80px] md:blur-[120px] -z-10 pointer-events-none" />
+        <div className="relative w-full flex flex-col items-center justify-center py-1 sm:py-6 md:py-10">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] sm:w-[500px] md:w-[800px] h-[240px] sm:h-[500px] md:h-[800px] bg-emerald-500/10 rounded-full blur-[50px] sm:blur-[80px] md:blur-[120px] -z-10 pointer-events-none" />
 
 
 
@@ -66,7 +66,7 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
                 </div>
             </div>
 
-            <h2 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-8 md:mb-12 mt-2 sm:mt-8 md:mt-16 tracking-tight text-center">
+            <h2 className="text-lg sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-2 sm:mb-8 md:mb-12 mt-1 sm:mt-8 md:mt-16 tracking-tight text-center">
                 Time until <span className="text-emerald-400">Iftar</span>
             </h2>
 
@@ -79,8 +79,8 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
             </div>
 
             {/* Animated Progress Bar */}
-            <div className="w-full max-w-sm sm:max-w-md md:max-w-xl mt-6 sm:mt-10 md:mt-16 px-4">
-                <div className="flex justify-between text-[9px] sm:text-xs text-slate-400 font-medium tracking-wider mb-2 uppercase">
+            <div className="w-full max-w-sm sm:max-w-md md:max-w-xl mt-4 sm:mt-10 md:mt-16 px-4">
+                <div className="flex justify-between text-[8px] sm:text-xs text-slate-400 font-medium tracking-wider mb-1 uppercase">
                     <span>Fajr</span>
                     <span>{progress.toFixed(0)}%</span>
                     <span>Maghrib</span>
@@ -126,7 +126,7 @@ const TimeUnit = ({ value, label }: { value: number; label: string }) => (
 );
 
 const Separator = () => (
-    <div className="flex flex-col gap-2 sm:gap-4 md:gap-6 py-6 sm:py-10 md:py-20 opacity-50">
+    <div className="flex flex-col gap-1.5 sm:gap-4 md:gap-6 py-4 sm:py-10 md:py-20 opacity-50">
         <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 md:w-2 md:h-2 rounded-full bg-slate-400" />
         <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 md:w-2 md:h-2 rounded-full bg-slate-400" />
     </div>
