@@ -13,12 +13,14 @@ interface CountdownHeroProps {
 export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTime, locationName, hijriDate }) => {
     const [timeLeft, setTimeLeft] = useState<{ h: number; m: number; s: number } | null>(null);
     const [progress, setProgress] = useState<number>(0);
+    const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
     useEffect(() => {
         if (!iftarTime || !fajrTime) return;
 
         const interval = setInterval(() => {
             const now = new Date();
+            setCurrentTime(now);
 
             // Progress Calculation
             const totalDuration = iftarTime.getTime() - fajrTime.getTime();
@@ -51,16 +53,27 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
 
             <div className="relative z-10 text-center space-y-4 md:space-y-4 max-w-4xl mx-auto">
 
-                {/* Header Badge */}
-                <div className="animate-in fade-in slide-in-from-top-4 duration-700 delay-100 flex flex-col items-center gap-6">
-                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium tracking-wide shadow-lg shadow-emerald-500/5 backdrop-blur-sm">
-                        {hijriDate || format(new Date(), 'd MMMM yyyy')}
+                {/* Header Badge & Dates */}
+                <div className="animate-in fade-in slide-in-from-top-4 duration-700 delay-100 flex flex-col items-center gap-1.5 sm:gap-4">
+                    {/* Gregorian Date */}
+                    <p className="text-[10px] sm:text-xs font-semibold text-slate-500 tracking-[0.2em] uppercase">
+                        {format(currentTime, 'EEEE, d MMMM yyyy')}
+                    </p>
+
+                    {/* Hijri Date Badge */}
+                    <span className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs sm:text-base font-bold tracking-wide shadow-lg shadow-emerald-500/5 backdrop-blur-sm">
+                        {hijriDate || '24 Ramadan 1447'}
                     </span>
 
+                    {/* Current Browser Time */}
+                    <p className="text-xl sm:text-3xl font-black text-white tabular-nums tracking-tighter glow-text-sm leading-none">
+                        {format(currentTime, 'HH:mm:ss')}
+                    </p>
+
                     {locationName && (
-                        <div className="flex items-center gap-1.5 text-slate-400 text-xs sm:text-sm font-medium tracking-wider uppercase animate-in fade-in slide-in-from-top-2 duration-700 delay-200 px-4 text-center leading-relaxed">
-                            <MapPin className="w-3.5 h-3.5 text-emerald-500/50 shrink-0" />
-                            <span>{locationName}</span>
+                        <div className="flex items-center justify-center gap-1.5 text-slate-400 text-[10px] sm:text-sm font-medium tracking-wider uppercase animate-in fade-in slide-in-from-top-2 duration-700 delay-200 px-4 text-center leading-relaxed">
+                            <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-500/50 shrink-0" />
+                            <span className="truncate max-w-[250px] sm:max-w-none">{locationName}</span>
                         </div>
                     )}
                 </div>
