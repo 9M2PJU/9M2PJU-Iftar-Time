@@ -1,12 +1,7 @@
 
 import React from 'react';
-import { Heart } from 'lucide-react';
 
-interface NavbarProps {
-    onAboutClick: () => void;
-}
-
-export const Navbar: React.FC<NavbarProps> = ({ onAboutClick }) => {
+export const Navbar: React.FC = () => {
     return (
         <nav className="sticky top-0 w-full p-4 flex items-center justify-between z-50 transition-all duration-300 backdrop-blur-md bg-[#0f172a]/80 border-b border-white/5 supports-[backdrop-filter]:bg-[#0f172a]/60">
             {/* Left Spacer for centering title */}
@@ -39,16 +34,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onAboutClick }) => {
                 <p className="text-xs text-slate-400 tracking-wider text-center mt-1">MODERN COMPANION DURING RAMADHAN</p>
             </div>
 
-            {/* Right Action Button */}
-            <div className="flex justify-end sm:w-32">
-                <button
-                    onClick={onAboutClick}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20 transition-all duration-300 group shadow-lg shadow-emerald-500/5"
-                >
-                    <Heart className="w-4 h-4 fill-emerald-500/20 group-hover:fill-emerald-500 transition-colors" />
-                    <span className="text-xs font-bold tracking-tight hidden xs:inline">Sadaqah</span>
-                </button>
-            </div>
+            {/* Right spacer to balance layout */}
+            <div className="flex justify-end sm:w-32" />
         </nav>
     );
 };

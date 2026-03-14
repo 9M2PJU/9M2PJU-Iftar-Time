@@ -1,11 +1,10 @@
 
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import { useGeoLocation } from './hooks/useGeoLocation';
 import { useSolat } from './hooks/useSolat';
 import { Navbar } from './components/Navbar';
 import { CountdownHero } from './components/CountdownHero';
 import { PrayerGrid } from './components/PrayerGrid';
-import { AboutModal } from './components/AboutModal';
 import { format } from 'date-fns';
 import { formatHijriDate } from './utils/hijri';
 
@@ -15,17 +14,6 @@ function App() {
     location?.latitude || null,
     location?.longitude || null
   );
-
-  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
-
-  useEffect(() => {
-    // Check if user has visited before
-    const hasVisited = localStorage.getItem('visited_9m2pju_iftar');
-    if (!hasVisited) {
-      setIsAboutModalOpen(true);
-      localStorage.setItem('visited_9m2pju_iftar', 'true');
-    }
-  }, []);
 
   const iftarTime = useMemo(() => {
     if (!solatData) return null;
@@ -78,9 +66,9 @@ function App() {
 
   return (
     <div className="min-h-[100dvh] md:h-screen w-full bg-[#0f172a] text-white selection:bg-emerald-500/30 flex flex-col relative pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] overflow-hidden">
-      <Navbar onAboutClick={() => setIsAboutModalOpen(true)} />
+      <Navbar />
 
-      <main className="flex-1 container mx-auto px-4 flex flex-col items-center w-full max-w-5xl py-4 md:py-2 gap-4">
+      <main className="flex-1 container mx-auto px-4 flex flex-col items-center w-full max-w-5xl py-4 md:py-2 gap-4 overflow-hidden">
         {geoError && (
           <div className="max-w-md mx-auto bg-red-500/10 border border-red-500/20 text-red-200 p-4 rounded-xl text-center">
             {geoError}
@@ -108,21 +96,10 @@ function App() {
         <footer className="w-full text-center py-4 mt-auto">
           <p className="text-slate-500 text-xs font-medium tracking-wide">
             Made with <span className="text-red-500 animate-pulse">❤️</span> by{' '}
-            <button
-              onClick={() => setIsAboutModalOpen(true)}
-              className="text-emerald-500 hover:text-emerald-400 transition-colors uppercase font-bold"
-            >
-              9M2PJU
-            </button>
+            <span className="text-emerald-500 uppercase font-bold">9M2PJU</span>
           </p>
         </footer>
       </main>
-
-      {/* Welcome Popup */}
-      <AboutModal
-        isOpen={isAboutModalOpen}
-        onClose={() => setIsAboutModalOpen(false)}
-      />
     </div>
   );
 }
