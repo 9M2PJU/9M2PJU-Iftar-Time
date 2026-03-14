@@ -7,9 +7,32 @@
 }
 
 @layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   body {
     @apply bg-background text-white antialiased;
     font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Hide scrollbars on mobile and desktop while preserving scroll */
+  * {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+
+  *::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
   }
 }
 
@@ -17,7 +40,7 @@
   .glass-panel {
     @apply bg-slate-800/50 backdrop-blur-lg border border-white/10 shadow-xl;
   }
-  
+
   .glow-text {
     text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
   }
