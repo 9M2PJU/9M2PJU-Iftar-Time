@@ -68,7 +68,7 @@ function App() {
   }
 
   return (
-    <div className="h-[100dvh] w-full bg-[#0f172a] text-white selection:bg-emerald-500/30 flex items-start justify-center relative pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] overflow-hidden">
+    <div className="h-[100dvh] w-full bg-[#0f172a] text-white selection:bg-emerald-500/30 flex flex-col items-center justify-between relative pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] overflow-hidden">
       <div
         className="origin-top flex flex-col w-full max-w-md"
         style={{
@@ -78,38 +78,36 @@ function App() {
         <Navbar />
 
         <main className="flex-1 container mx-auto px-4 flex flex-col items-center w-full max-w-5xl py-3 md:py-2 gap-3">
-        {geoError && (
-          <div className="max-w-md mx-auto bg-red-500/10 border border-red-500/20 text-red-200 p-4 rounded-xl text-center">
-            {geoError}
+          {geoError && (
+            <div className="max-w-md mx-auto bg-red-500/10 border border-red-500/20 text-red-200 p-4 rounded-xl text-center">
+              {geoError}
+            </div>
+          )}
+
+          {/* Hero Section - Scaled for fit */}
+          <div className="w-full flex justify-center">
+            <CountdownHero
+              iftarTime={iftarTime}
+              fajrTime={fajrTime}
+              locationName={zone}
+              hijriDate={solatData?.hijri ? formatHijriDate(solatData.hijri) : undefined}
+            />
           </div>
-        )}
 
-        {/* Hero Section - Scaled for fit */}
-        <div className="w-full flex justify-center">
-          <CountdownHero
-            iftarTime={iftarTime}
-            fajrTime={fajrTime}
-            locationName={zone}
-            hijriDate={solatData?.hijri ? formatHijriDate(solatData.hijri) : undefined}
-          />
-        </div>
-
-        {/* Prayer Grid - Scaled for fit */}
-        {solatData && (
-          <div className="w-full animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <PrayerGrid prayers={prayerList} />
-          </div>
-        )}
-
-          {/* Footer */}
-          <footer className="w-full text-center py-4 mt-auto">
-            <p className="text-slate-500 text-xs font-medium tracking-wide">
-              Made with <span className="text-red-500 animate-pulse">❤️</span> by{' '}
-              <span className="text-emerald-500 uppercase font-bold">9M2PJU</span>
-            </p>
-          </footer>
+          {/* Prayer Grid - Scaled for fit */}
+          {solatData && (
+            <div className="w-full animate-in fade-in slide-in-from-bottom-8 duration-700">
+              <PrayerGrid prayers={prayerList} />
+            </div>
+          )}
         </main>
       </div>
+
+      {/* Fixed footer at bottom (not scaled) */}
+      <footer className="w-full text-center py-3 text-slate-500 text-[11px] font-medium tracking-wide">
+        Made with <span className="text-red-500 animate-pulse">❤️</span> by{' '}
+        <span className="text-emerald-500 uppercase font-bold">9M2PJU</span>
+      </footer>
     </div>
   );
 }
