@@ -16,7 +16,7 @@ interface PrayerGridProps {
 
 export const PrayerGrid: React.FC<PrayerGridProps> = ({ prayers }) => {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 w-full max-w-4xl mx-auto px-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5 md:gap-3 w-full max-w-4xl mx-auto px-3 md:px-4 pb-2">
             {prayers.map((prayer) => (
                 <PrayerCard key={prayer.name} prayer={prayer} />
             ))}
@@ -29,7 +29,7 @@ const PrayerCard = ({ prayer }: { prayer: PrayerTime }) => {
 
     return (
         <div className={clsx(
-            "relative p-3 md:p-4 rounded-2xl border transition-all duration-300 overflow-hidden group",
+            "relative p-2.5 md:p-4 rounded-2xl border transition-all duration-300 overflow-hidden group",
             prayer.isNext
                 ? "bg-slate-900 border-emerald-500 shadow-xl shadow-emerald-500/20 scale-[1.02]"
                 : "bg-slate-800/40 border-white/5 hover:bg-slate-800/60"
@@ -40,7 +40,7 @@ const PrayerCard = ({ prayer }: { prayer: PrayerTime }) => {
                 </div>
             )}
 
-            <div className="flex justify-between items-center mb-3">
+            <div className="flex justify-between items-center mb-2.5 md:mb-3">
                 <Icon className={clsx("w-5 h-5", prayer.isNext ? "text-emerald-400" : "text-slate-400")} />
                 {prayer.isNext && (
                     <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-500 text-slate-900">NEXT</span>

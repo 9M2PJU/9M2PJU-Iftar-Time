@@ -41,7 +41,7 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
         return () => clearInterval(interval);
     }, [iftarTime, fajrTime]);
 
-    if (!timeLeft) return <div className="animate-pulse h-48 w-full bg-slate-800/50 rounded-3xl" />;
+    if (!timeLeft) return <div className="animate-pulse h-40 md:h-48 w-full bg-slate-800/50 rounded-3xl" />;
 
     return (
         <div className="relative w-full flex flex-col items-center justify-center py-2 md:py-4">
@@ -66,11 +66,11 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
                 </div>
             </div>
 
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 md:mb-6 mt-8 md:mt-10 tracking-tight">
+            <h2 className="text-3xl md:text-6xl font-bold text-white mb-3 md:mb-6 mt-4 md:mt-10 tracking-tight">
                 Time until <span className="text-emerald-400">Iftar</span>
             </h2>
 
-            <div className="flex items-start gap-4 md:gap-8">
+            <div className="flex items-start gap-3 md:gap-8">
                 <TimeUnit value={timeLeft.h} label="HOURS" />
                 <Separator />
                 <TimeUnit value={timeLeft.m} label="MINUTES" />
@@ -79,7 +79,7 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
             </div>
 
             {/* Animated Progress Bar */}
-            <div className="w-full max-w-xs md:max-w-sm mt-6 md:mt-8">
+            <div className="w-full max-w-xs md:max-w-sm mt-4 md:mt-8">
                 <div className="flex justify-between text-[10px] text-slate-400 font-medium tracking-wider mb-1.5 uppercase">
                     <span>Fajr</span>
                     <span>{progress.toFixed(0)}%</span>
@@ -115,13 +115,13 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
 
 const TimeUnit = ({ value, label }: { value: number; label: string }) => (
     <div className="flex flex-col items-center">
-        <div className="w-24 h-28 md:w-32 md:h-36 bg-slate-800/50 backdrop-blur-xl border border-white/5 rounded-2xl flex items-center justify-center shadow-2xl relative overflow-hidden group">
+        <div className="w-20 h-24 md:w-32 md:h-36 bg-slate-800/50 backdrop-blur-xl border border-white/5 rounded-2xl flex items-center justify-center shadow-2xl relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <span className="text-5xl md:text-7xl font-bold text-emerald-400 tabular-nums tracking-tighter glow-text">
+            <span className="text-4xl md:text-7xl font-bold text-emerald-400 tabular-nums tracking-tighter glow-text">
                 {value.toString().padStart(2, '0')}
             </span>
         </div>
-        <span className="mt-4 text-xs md:text-sm font-semibold text-slate-500 tracking-widest">{label}</span>
+        <span className="mt-2 text-[10px] md:text-sm font-semibold text-slate-500 tracking-widest">{label}</span>
     </div>
 );
 
