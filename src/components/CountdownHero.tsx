@@ -115,13 +115,13 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
 
 const TimeUnit = ({ value, label }: { value: number; label: string }) => (
     <div className="flex flex-col items-center">
-        <div className="w-20 h-28 sm:w-28 sm:h-36 md:w-44 md:h-56 bg-slate-800/50 backdrop-blur-xl border border-white/5 rounded-2xl md:rounded-[32px] flex items-center justify-center shadow-2xl relative overflow-hidden group">
+        <div className="w-16 h-24 sm:w-28 sm:h-36 md:w-36 md:h-48 lg:w-44 lg:h-56 bg-slate-800/50 backdrop-blur-xl border border-white/5 rounded-2xl md:rounded-[32px] flex items-center justify-center shadow-2xl relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <span className="text-3xl sm:text-5xl md:text-8xl font-bold text-emerald-400 tabular-nums tracking-tighter glow-text">
+            <span className="text-2xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-emerald-400 tabular-nums tracking-tighter glow-text">
                 {value.toString().padStart(2, '0')}
             </span>
         </div>
-        <span className="mt-3 text-[10px] sm:text-xs md:text-sm font-semibold text-slate-500 tracking-widest">{label}</span>
+        <span className="mt-2 sm:mt-3 text-[9px] sm:text-xs md:text-sm font-semibold text-slate-500 tracking-widest">{label}</span>
     </div>
 );
 
