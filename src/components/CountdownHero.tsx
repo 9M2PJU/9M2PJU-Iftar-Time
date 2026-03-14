@@ -66,11 +66,11 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
                 </div>
             </div>
 
-            <h2 className="text-lg sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-2 sm:mb-8 md:mb-12 mt-1 sm:mt-8 md:mt-16 tracking-tight text-center">
+            <h2 className="text-lg sm:text-3xl md:text-5xl lg:text-5xl xl:text-7xl 2xl:text-8xl font-bold text-white mb-2 sm:mb-8 md:mb-12 mt-1 sm:mt-8 md:mt-16 tracking-tight text-center transition-all duration-700">
                 Time until <span className="text-emerald-400">Iftar</span>
             </h2>
 
-            <div className="flex items-start gap-3 sm:gap-6 md:gap-10">
+            <div className="flex items-start gap-3 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-14 2xl:gap-20">
                 <TimeUnit value={timeLeft.h} label="HOURS" />
                 <Separator />
                 <TimeUnit value={timeLeft.m} label="MINUTES" />
@@ -79,13 +79,13 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
             </div>
 
             {/* Animated Progress Bar */}
-            <div className="w-full max-w-sm sm:max-w-md md:max-w-xl mt-4 sm:mt-10 md:mt-16 px-4">
-                <div className="flex justify-between text-[8px] sm:text-xs text-slate-400 font-medium tracking-wider mb-1 uppercase">
+            <div className="w-full max-w-sm sm:max-w-md md:max-w-xl xl:max-w-3xl 2xl:max-w-5xl mt-4 sm:mt-10 md:mt-16 px-4">
+                <div className="flex justify-between text-[8px] sm:text-xs xl:text-sm 2xl:text-base text-slate-400 font-medium tracking-wider mb-1 xl:mb-3 uppercase">
                     <span>Fajr</span>
                     <span>{progress.toFixed(0)}%</span>
                     <span>Maghrib</span>
                 </div>
-                <div className="relative h-3 bg-slate-800/50 rounded-full overflow-visible border border-white/5">
+                <div className="relative h-3 lg:h-4 2xl:h-5 bg-slate-800/50 rounded-full overflow-visible border border-white/5">
                     {/* Progress Fill */}
                     <div
                         className="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-full transition-all duration-1000 ease-out"
@@ -98,14 +98,14 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
                         style={{ left: `${progress}%` }}
                     >
                         <div className="relative">
-                            <span className="text-xl sm:text-2xl md:text-4xl filter drop-shadow-lg transform -scale-x-100 inline-block animate-bounce-slight">🏃</span>
+                            <span className="text-xl sm:text-2xl md:text-4xl xl:text-5xl 2xl:text-6xl filter drop-shadow-lg transform -scale-x-100 inline-block animate-bounce-slight">🏃</span>
                             <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-1 bg-black/20 blur-sm rounded-full" />
                         </div>
                     </div>
 
                     {/* Food Target at the end */}
                     <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 z-0">
-                        <span className="text-xl sm:text-2xl md:text-3xl filter drop-shadow-lg">🍱</span>
+                        <span className="text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl filter drop-shadow-lg">🍱</span>
                     </div>
                 </div>
             </div>
@@ -115,13 +115,13 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
 
 const TimeUnit = ({ value, label }: { value: number; label: string }) => (
     <div className="flex flex-col items-center">
-        <div className="w-16 h-24 sm:w-28 sm:h-36 md:w-36 md:h-48 lg:w-44 lg:h-56 bg-slate-800/50 backdrop-blur-xl border border-white/5 rounded-2xl md:rounded-[32px] flex items-center justify-center shadow-2xl relative overflow-hidden group">
+        <div className="w-16 h-24 sm:w-28 sm:h-36 md:w-36 md:h-48 lg:w-44 lg:h-56 xl:w-56 xl:h-72 2xl:w-72 2xl:h-96 bg-slate-800/50 backdrop-blur-xl border border-white/5 rounded-2xl md:rounded-[32px] 2xl:rounded-[48px] flex items-center justify-center shadow-2xl relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <span className="text-2xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-emerald-400 tabular-nums tracking-tighter glow-text">
+            <span className="text-2xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[11rem] font-bold text-emerald-400 tabular-nums tracking-tighter glow-text">
                 {value.toString().padStart(2, '0')}
             </span>
         </div>
-        <span className="mt-2 sm:mt-3 text-[9px] sm:text-xs md:text-sm font-semibold text-slate-500 tracking-widest">{label}</span>
+        <span className="mt-2 sm:mt-3 xl:mt-5 text-[9px] sm:text-xs md:text-sm xl:text-base 2xl:text-xl font-semibold text-slate-500 tracking-widest">{label}</span>
     </div>
 );
 
