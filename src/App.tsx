@@ -66,7 +66,7 @@ function App() {
 
   return (
     <div className="h-[100dvh] w-full bg-[#0f172a] text-white selection:bg-emerald-500/30 flex flex-col items-center relative pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] overflow-hidden">
-      <div className="flex flex-col w-full max-w-7xl h-full">
+      <div className="flex flex-col w-full max-w-7xl flex-1 overflow-hidden">
         <Navbar />
 
         <main className="flex-1 w-full px-4 flex flex-col items-center justify-center py-2 sm:py-4 md:py-8 gap-4 sm:gap-8 md:gap-12 overflow-y-auto">
@@ -93,13 +93,13 @@ function App() {
             </div>
           )}
         </main>
-      </div>
 
-      {/* Fixed footer at bottom */}
-      <footer className="w-full text-center py-2 md:py-4 text-slate-500 text-[10px] md:text-[11px] font-medium tracking-wide shrink-0">
-        Made with <span className="text-red-500 animate-pulse">❤️</span> by{' '}
-        <span className="text-emerald-500 uppercase font-bold">9M2PJU</span>
-      </footer>
+        {/* Fixed footer at bottom */}
+        <footer className="w-full text-center py-2 md:py-4 text-slate-500 text-[10px] md:text-[11px] font-medium tracking-wide shrink-0">
+          Made with <span className="text-red-500 animate-pulse">❤️</span> by{' '}
+          <span className="text-emerald-500 uppercase font-bold">9M2PJU</span>
+        </footer>
+      </div>
     </div>
   );
 }
