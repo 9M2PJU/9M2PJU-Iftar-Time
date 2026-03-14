@@ -115,7 +115,7 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
 
 const TimeUnit = ({ value, label }: { value: number; label: string }) => (
     <div className="flex flex-col items-center">
-        <div className="w-16 h-24 sm:w-28 sm:h-36 md:w-36 md:h-48 lg:w-44 lg:h-56 xl:w-56 xl:h-72 2xl:w-72 2xl:h-96 bg-slate-800/50 backdrop-blur-xl border border-white/5 rounded-2xl md:rounded-[32px] 2xl:rounded-[48px] flex items-center justify-center shadow-2xl relative overflow-hidden group">
+        <div className="w-16 h-24 sm:w-28 sm:h-36 md:w-36 md:h-48 lg:w-44 lg:h-56 xl:w-56 xl:h-64 2xl:w-64 2xl:h-80 bg-slate-800/50 backdrop-blur-xl border border-white/5 rounded-2xl md:rounded-[32px] 2xl:rounded-[40px] flex items-center justify-center shadow-2xl relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             <span className="text-2xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[11rem] font-bold text-emerald-400 tabular-nums tracking-tighter glow-text">
                 {value.toString().padStart(2, '0')}
