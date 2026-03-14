@@ -5,7 +5,6 @@ import { useSolat } from './hooks/useSolat';
 import { Navbar } from './components/Navbar';
 import { CountdownHero } from './components/CountdownHero';
 import { PrayerGrid } from './components/PrayerGrid';
-import { useViewportScale } from './hooks/useViewportScale';
 import { format } from 'date-fns';
 import { formatHijriDate } from './utils/hijri';
 
@@ -15,8 +14,6 @@ function App() {
     location?.latitude || null,
     location?.longitude || null
   );
-
-  const scale = useViewportScale(390, 780);
 
   const iftarTime = useMemo(() => {
     if (!solatData) return null;
@@ -68,16 +65,11 @@ function App() {
   }
 
   return (
-    <div className="h-[100dvh] w-full bg-[#0f172a] text-white selection:bg-emerald-500/30 flex flex-col items-center justify-between relative pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] overflow-hidden">
-      <div
-        className="origin-top flex flex-col w-full max-w-md"
-        style={{
-          transform: `scale(${scale})`,
-        }}
-      >
+    <div className="h-[100dvh] w-full bg-[#0f172a] text-white selection:bg-emerald-500/30 flex flex-col items-center relative pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] overflow-hidden">
+      <div className="flex flex-col w-full max-w-7xl h-full">
         <Navbar />
 
-        <main className="flex-1 container mx-auto px-4 flex flex-col items-center w-full max-w-5xl py-3 md:py-2 gap-3">
+        <main className="flex-1 w-full px-4 flex flex-col items-center justify-center py-2 sm:py-4 md:py-8 gap-4 sm:gap-8 md:gap-12 overflow-y-auto">
           {geoError && (
             <div className="max-w-md mx-auto bg-red-500/10 border border-red-500/20 text-red-200 p-4 rounded-xl text-center">
               {geoError}
@@ -103,8 +95,8 @@ function App() {
         </main>
       </div>
 
-      {/* Fixed footer at bottom (not scaled) */}
-      <footer className="w-full text-center py-3 text-slate-500 text-[11px] font-medium tracking-wide">
+      {/* Fixed footer at bottom */}
+      <footer className="w-full text-center py-2 md:py-4 text-slate-500 text-[10px] md:text-[11px] font-medium tracking-wide shrink-0">
         Made with <span className="text-red-500 animate-pulse">❤️</span> by{' '}
         <span className="text-emerald-500 uppercase font-bold">9M2PJU</span>
       </footer>

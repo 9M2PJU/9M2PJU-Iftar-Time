@@ -20,7 +20,9 @@
   body {
     @apply bg-background text-white antialiased;
     font-family: 'Inter', system-ui, sans-serif;
-    overflow: hidden;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   /* Hide scrollbars on mobile and desktop while preserving scroll */

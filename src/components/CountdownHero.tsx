@@ -41,11 +41,11 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
         return () => clearInterval(interval);
     }, [iftarTime, fajrTime]);
 
-    if (!timeLeft) return <div className="animate-pulse h-40 md:h-48 w-full bg-slate-800/50 rounded-3xl" />;
+    if (!timeLeft) return <div className="animate-pulse h-48 md:h-64 w-full bg-slate-800/50 rounded-3xl" />;
 
     return (
-        <div className="relative w-full flex flex-col items-center justify-center py-2 md:py-4">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
+        <div className="relative w-full flex flex-col items-center justify-center py-2 sm:py-6 md:py-10">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[500px] md:w-[800px] h-[280px] sm:h-[500px] md:h-[800px] bg-emerald-500/10 rounded-full blur-[60px] sm:blur-[80px] md:blur-[120px] -z-10 pointer-events-none" />
 
 
 
@@ -58,7 +58,7 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
                     </span>
 
                     {locationName && (
-                        <div className="flex items-center gap-1.5 text-slate-400 text-xs md:text-sm font-medium tracking-wider uppercase animate-in fade-in slide-in-from-top-2 duration-700 delay-200 px-4 text-center leading-relaxed">
+                        <div className="flex items-center gap-1.5 text-slate-400 text-xs sm:text-sm font-medium tracking-wider uppercase animate-in fade-in slide-in-from-top-2 duration-700 delay-200 px-4 text-center leading-relaxed">
                             <MapPin className="w-3.5 h-3.5 text-emerald-500/50 shrink-0" />
                             <span>{locationName}</span>
                         </div>
@@ -66,11 +66,11 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
                 </div>
             </div>
 
-            <h2 className="text-3xl md:text-6xl font-bold text-white mb-3 md:mb-6 mt-4 md:mt-10 tracking-tight">
+            <h2 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-8 md:mb-12 mt-2 sm:mt-8 md:mt-16 tracking-tight text-center">
                 Time until <span className="text-emerald-400">Iftar</span>
             </h2>
 
-            <div className="flex items-start gap-3 md:gap-8">
+            <div className="flex items-start gap-3 sm:gap-6 md:gap-10">
                 <TimeUnit value={timeLeft.h} label="HOURS" />
                 <Separator />
                 <TimeUnit value={timeLeft.m} label="MINUTES" />
@@ -79,8 +79,8 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
             </div>
 
             {/* Animated Progress Bar */}
-            <div className="w-full max-w-xs md:max-w-sm mt-4 md:mt-8">
-                <div className="flex justify-between text-[10px] text-slate-400 font-medium tracking-wider mb-1.5 uppercase">
+            <div className="w-full max-w-sm sm:max-w-md md:max-w-xl mt-6 sm:mt-10 md:mt-16 px-4">
+                <div className="flex justify-between text-[9px] sm:text-xs text-slate-400 font-medium tracking-wider mb-2 uppercase">
                     <span>Fajr</span>
                     <span>{progress.toFixed(0)}%</span>
                     <span>Maghrib</span>
@@ -98,14 +98,14 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
                         style={{ left: `${progress}%` }}
                     >
                         <div className="relative">
-                            <span className="text-2xl md:text-3xl filter drop-shadow-lg transform -scale-x-100 inline-block animate-bounce-slight">🏃</span>
+                            <span className="text-xl sm:text-2xl md:text-4xl filter drop-shadow-lg transform -scale-x-100 inline-block animate-bounce-slight">🏃</span>
                             <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-1 bg-black/20 blur-sm rounded-full" />
                         </div>
                     </div>
 
                     {/* Food Target at the end */}
                     <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 z-0">
-                        <span className="text-xl md:text-2xl filter drop-shadow-lg">🍱</span>
+                        <span className="text-xl sm:text-2xl md:text-3xl filter drop-shadow-lg">🍱</span>
                     </div>
                 </div>
             </div>
@@ -115,19 +115,19 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
 
 const TimeUnit = ({ value, label }: { value: number; label: string }) => (
     <div className="flex flex-col items-center">
-        <div className="w-20 h-24 md:w-32 md:h-36 bg-slate-800/50 backdrop-blur-xl border border-white/5 rounded-2xl flex items-center justify-center shadow-2xl relative overflow-hidden group">
+        <div className="w-20 h-28 sm:w-28 sm:h-36 md:w-44 md:h-56 bg-slate-800/50 backdrop-blur-xl border border-white/5 rounded-2xl md:rounded-[32px] flex items-center justify-center shadow-2xl relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <span className="text-4xl md:text-7xl font-bold text-emerald-400 tabular-nums tracking-tighter glow-text">
+            <span className="text-3xl sm:text-5xl md:text-8xl font-bold text-emerald-400 tabular-nums tracking-tighter glow-text">
                 {value.toString().padStart(2, '0')}
             </span>
         </div>
-        <span className="mt-2 text-[10px] md:text-sm font-semibold text-slate-500 tracking-widest">{label}</span>
+        <span className="mt-3 text-[10px] sm:text-xs md:text-sm font-semibold text-slate-500 tracking-widest">{label}</span>
     </div>
 );
 
 const Separator = () => (
-    <div className="flex flex-col gap-3 py-8 opacity-50">
-        <div className="w-1.5 h-1.5 rounded-full bg-slate-400" />
-        <div className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+    <div className="flex flex-col gap-2 sm:gap-4 md:gap-6 py-6 sm:py-10 md:py-20 opacity-50">
+        <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 md:w-2 md:h-2 rounded-full bg-slate-400" />
+        <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 md:w-2 md:h-2 rounded-full bg-slate-400" />
     </div>
 );
