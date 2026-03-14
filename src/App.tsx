@@ -88,6 +88,9 @@ function App() {
           </div>
 
           {/* Prayer Grid - Scaled for fit */}
+          {solatData && (
+            <div className="w-full animate-in fade-in slide-in-from-bottom-8 duration-700">
+              <PrayerGrid prayers={prayerList} />
             </div>
           )}
         </div>
