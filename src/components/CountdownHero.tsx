@@ -46,7 +46,7 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
     if (!timeLeft) return <div className="animate-pulse h-48 md:h-64 w-full bg-slate-800/50 rounded-3xl" />;
 
     return (
-        <div className="relative w-full flex flex-col items-center justify-center py-1 sm:py-6 md:py-10">
+        <div className="relative w-full flex flex-col items-center justify-center py-1 sm:py-6 md:py-10 2xl:py-4">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] sm:w-[500px] md:w-[800px] h-[240px] sm:h-[500px] md:h-[800px] bg-emerald-500/10 rounded-full blur-[50px] sm:blur-[80px] md:blur-[120px] -z-10 pointer-events-none" />
 
 
@@ -79,11 +79,11 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
                 </div>
             </div>
 
-            <h2 className="text-base sm:text-3xl md:text-5xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-bold text-white mb-2 sm:mb-6 md:mb-4 mt-2 sm:mt-4 md:mt-4 tracking-tight text-center transition-all duration-700">
+            <h2 className="text-base sm:text-3xl md:text-5xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-bold text-white mb-2 sm:mb-6 md:mb-4 2xl:mb-2 mt-2 sm:mt-4 md:mt-4 2xl:mt-1 tracking-tight text-center transition-all duration-700">
                 Time until <span className="text-emerald-400">Iftar</span>
             </h2>
 
-            <div className="flex items-start gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-10 2xl:gap-12 transition-all duration-500">
+            <div className="flex items-start gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-10 2xl:gap-8 transition-all duration-500">
                 <TimeUnit value={timeLeft.h} label="HOURS" />
                 <Separator />
                 <TimeUnit value={timeLeft.m} label="MINUTES" />
@@ -92,7 +92,7 @@ export const CountdownHero: React.FC<CountdownHeroProps> = ({ iftarTime, fajrTim
             </div>
 
             {/* Animated Progress Bar */}
-            <div className="w-full max-w-sm sm:max-w-md md:max-w-xl xl:max-w-2xl 2xl:max-w-3xl mt-6 sm:mt-8 md:mt-4 px-4 transition-all duration-500">
+            <div className="w-full max-w-sm sm:max-w-md md:max-w-xl xl:max-w-2xl 2xl:max-w-3xl mt-6 sm:mt-8 md:mt-4 2xl:mt-2 px-4 transition-all duration-500">
                 <div className="flex justify-between text-[8px] sm:text-xs xl:text-sm 2xl:text-base text-slate-400 font-medium tracking-wider mb-1 xl:mb-3 uppercase">
                     <span>Fajr</span>
                     <span>{progress.toFixed(0)}%</span>
