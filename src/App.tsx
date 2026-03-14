@@ -69,8 +69,8 @@ function App() {
       <div className="flex flex-col w-full max-w-7xl 2xl:max-w-[1600px] flex-1 h-full overflow-hidden transition-all duration-700">
         <Navbar />
 
-        <main className="flex-1 w-full overflow-y-auto px-4 scrollbar-none flex flex-col">
-          <div className="w-full flex flex-col items-center py-4 sm:py-8 md:py-12 2xl:py-20 gap-4 sm:gap-10 md:gap-16 2xl:gap-24">
+        <main className="flex-1 w-full overflow-hidden px-4 flex flex-col">
+          <div className="flex-1 w-full flex flex-col items-center justify-between py-2 sm:py-6 md:py-8 2xl:py-10 max-h-full">
           {geoError && (
             <div className="max-w-md mx-auto bg-red-500/10 border border-red-500/20 text-red-200 p-4 rounded-xl text-center">
               {geoError}
