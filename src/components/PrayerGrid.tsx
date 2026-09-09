@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Sun, Moon, CloudSun, Sunrise, Sunset, Clock } from 'lucide-react';
+import { type Language, TRANSLATIONS } from '../utils/i18n';
 
 export interface PrayerTimeItem {
     name: string;
@@ -13,6 +14,7 @@ export interface PrayerTimeItem {
 interface PrayerGridProps {
     prayers: PrayerTimeItem[];
     is24Hour?: boolean;
+    language?: Language;
 }
 
 const PRAYER_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -49,9 +51,17 @@ const getAmPm = (time24: string | undefined | null) => {
     return h >= 12 ? 'PM' : 'AM';
 };
 
-const PrayerCard: React.FC<{ prayer: PrayerTimeItem; is24Hour: boolean }> = ({ prayer, is24Hour }) => {
+const PrayerCard: React.FC<{ prayer: PrayerTimeItem; is24Hour: boolean; language: Language }> = ({
+    prayer,
+    is24Hour,
+    language,
+}) => {
     const key = prayer.name.toLowerCase();
     const IconComponent = PRAYER_ICONS[key] || Sun;
+    const t = TRANSLATIONS[language].prayers;
+
+    // Get translated name if available
+    const translatedName = (t as Record<string, string>)[key] || prayer.displayName || prayer.name;
 
     return (
         <div
@@ -77,7 +87,7 @@ const PrayerCard: React.FC<{ prayer: PrayerTimeItem; is24Hour: boolean }> = ({ p
                 />
                 {prayer.isNext ? (
                     <span className="px-1.5 py-0.5 rounded-full text-[8px] sm:text-[9px] font-extrabold bg-emerald-500 text-slate-950 uppercase tracking-wider">
-                        SETERUSNYA
+                        {t.next}
                     </span>
                 ) : (
                     prayer.time && !is24Hour && (
@@ -90,7 +100,7 @@ const PrayerCard: React.FC<{ prayer: PrayerTimeItem; is24Hour: boolean }> = ({ p
 
             <div className="mt-auto">
                 <h3 className="text-[9px] sm:text-xs font-semibold text-slate-400 tracking-wider uppercase mb-0.5 truncate">
-                    {prayer.displayName || prayer.name}
+                    {translatedName}
                 </h3>
                 <p
                     className={clsx(
@@ -102,7 +112,7 @@ const PrayerCard: React.FC<{ prayer: PrayerTimeItem; is24Hour: boolean }> = ({ p
                 </p>
                 {prayer.isIftar && (
                     <p className="text-[8px] sm:text-[10px] text-emerald-400 mt-0.5 font-bold tracking-wider uppercase">
-                        IFTAR 🌙
+                        {t.iftarTag}
                     </p>
                 )}
             </div>
@@ -114,11 +124,20 @@ const PrayerCard: React.FC<{ prayer: PrayerTimeItem; is24Hour: boolean }> = ({ p
     );
 };
 
-export const PrayerGrid: React.FC<PrayerGridProps> = ({ prayers, is24Hour = false }) => {
+export const PrayerGrid: React.FC<PrayerGridProps> = ({
+    prayers,
+    is24Hour = false,
+    language = 'en',
+}) => {
     return (
         <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-6 gap-2 sm:gap-3 xl:gap-4 w-full max-w-6xl 2xl:max-w-[1300px] mx-auto px-2 sm:px-4 pb-1 transition-all duration-500">
             {prayers.map((prayer) => (
-                <PrayerCard key={prayer.name} prayer={prayer} is24Hour={is24Hour} />
+                <PrayerCard
+                    key={prayer.name}
+                    prayer={prayer}
+                    is24Hour={is24Hour}
+                    language={language}
+                />
             ))}
         </div>
     );

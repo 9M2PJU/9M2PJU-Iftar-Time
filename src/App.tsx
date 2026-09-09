@@ -11,12 +11,19 @@ import { AboutModal } from './components/AboutModal';
 import { format } from 'date-fns';
 import { formatHijriDate } from './utils/hijri';
 import { requestNotificationPermission } from './utils/audio';
+import { type Language, TRANSLATIONS } from './utils/i18n';
 
 const STORAGE_KEY_MANUAL_ZONE = 'iftar_manual_zone';
 const STORAGE_KEY_24H = 'iftar_is_24h';
 const STORAGE_KEY_SOUND = 'iftar_sound_enabled';
+const STORAGE_KEY_LANG = 'iftar_language';
 
 function App() {
+  const [language, setLanguage] = useState<Language>(() => {
+    const saved = localStorage.getItem(STORAGE_KEY_LANG);
+    return saved === 'ms' ? 'ms' : 'en'; // Default is English
+  });
+
   const [manualZoneCode, setManualZoneCode] = useState<string | null>(() => {
     return localStorage.getItem(STORAGE_KEY_MANUAL_ZONE) || null;
   });
@@ -36,6 +43,8 @@ function App() {
   const [isDoaModalOpen, setIsDoaModalOpen] = useState(false);
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 
+  const t = TRANSLATIONS[language];
+
   const { location, error: geoError, loading: geoLoading, requestLocation } = useGeoLocation();
 
   const {
@@ -52,6 +61,14 @@ function App() {
     location?.longitude || null,
     manualZoneCode
   );
+
+  const handleToggleLanguage = () => {
+    setLanguage((prev) => {
+      const next = prev === 'en' ? 'ms' : 'en';
+      localStorage.setItem(STORAGE_KEY_LANG, next);
+      return next;
+    });
+  };
 
   const handleSelectZone = (code: string) => {
     setManualZoneCode(code);
@@ -123,12 +140,12 @@ function App() {
     };
 
     const list = [
-      { name: 'Fajr', displayName: 'Subuh', time: formatTime(solatData.fajr) },
-      { name: 'Syuruk', displayName: 'Syuruk', time: formatTime(solatData.syuruk) },
-      { name: 'Dhuhr', displayName: 'Zohor', time: formatTime(solatData.dhuhr) },
-      { name: 'Asr', displayName: 'Asar', time: formatTime(solatData.asr) },
-      { name: 'Maghrib', displayName: 'Maghrib', time: formatTime(solatData.maghrib), isIftar: true },
-      { name: 'Isha', displayName: 'Isyak', time: formatTime(solatData.isha) },
+      { name: 'Fajr', time: formatTime(solatData.fajr) },
+      { name: 'Syuruk', time: formatTime(solatData.syuruk) },
+      { name: 'Dhuhr', time: formatTime(solatData.dhuhr) },
+      { name: 'Asr', time: formatTime(solatData.asr) },
+      { name: 'Maghrib', time: formatTime(solatData.maghrib), isIftar: true },
+      { name: 'Isha', time: formatTime(solatData.isha) },
     ];
 
     return list.map((p) => {
@@ -146,7 +163,7 @@ function App() {
       <div className="min-h-screen bg-[#0f172a] flex flex-col items-center justify-center text-white p-4">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-500 mb-4"></div>
         <p className="text-xs text-slate-400 font-medium tracking-widest uppercase animate-pulse">
-          Memuatkan Waktu Solat...
+          {t.error.loading}
         </p>
       </div>
     );
@@ -158,7 +175,9 @@ function App() {
         <Navbar
           zoneCode={zoneCode}
           is24Hour={is24Hour}
+          language={language}
           onToggle24Hour={handleToggle24Hour}
+          onToggleLanguage={handleToggleLanguage}
           onOpenZoneModal={() => setIsZoneModalOpen(true)}
           onOpenTakwimModal={() => setIsTakwimModalOpen(true)}
           onOpenDoaModal={() => setIsDoaModalOpen(true)}
@@ -170,12 +189,12 @@ function App() {
             {/* Error or Notice Banner */}
             {(geoError && !manualZoneCode) || solatError ? (
               <div className="w-full max-w-md mx-auto mb-2 bg-slate-800/80 border border-emerald-500/30 text-slate-200 p-3 rounded-2xl text-xs flex items-center justify-between gap-3 shadow-lg">
-                <span className="truncate">{solatError || geoError}</span>
+                <span className="truncate">{solatError || geoError || t.error.fetchFailed}</span>
                 <button
                   onClick={() => setIsZoneModalOpen(true)}
                   className="px-2.5 py-1 bg-emerald-500 text-slate-950 font-bold rounded-lg text-[11px] shrink-0 hover:bg-emerald-400 transition-colors"
                 >
-                  Pilih Zon
+                  {t.error.selectZone}
                 </button>
               </div>
             ) : null}
@@ -189,6 +208,7 @@ function App() {
                 tomorrowImsakTime={tomorrowImsakTime}
                 locationName={zone}
                 hijriDate={solatData?.hijri ? formatHijriDate(solatData.hijri) : undefined}
+                language={language}
                 soundEnabled={soundEnabled}
                 onToggleSound={handleToggleSound}
                 onOpenZoneModal={() => setIsZoneModalOpen(true)}
@@ -198,7 +218,7 @@ function App() {
             {/* Prayer Grid */}
             {solatData && (
               <div className="w-full animate-in fade-in slide-in-from-bottom-6 duration-700 mt-2 sm:mt-0">
-                <PrayerGrid prayers={prayerList} is24Hour={is24Hour} />
+                <PrayerGrid prayers={prayerList} is24Hour={is24Hour} language={language} />
               </div>
             )}
           </div>
@@ -207,10 +227,10 @@ function App() {
         {/* Footer */}
         <footer className="w-full text-center py-2 text-slate-500 text-[10px] sm:text-[11px] font-medium tracking-wide shrink-0 border-t border-white/5 bg-[#0f172a]/60">
           <div className="flex items-center justify-center gap-1.5 flex-wrap px-2">
-            <span>Dikuasakan oleh data rasmi JAKIM melalui waktusolat.app</span>
+            <span>{t.footer.poweredBy}</span>
             <span>•</span>
             <span>
-              Dibina oleh{' '}
+              {t.footer.builtBy}{' '}
               <button
                 onClick={() => setIsAboutModalOpen(true)}
                 className="text-emerald-400 hover:underline font-bold uppercase"
@@ -226,6 +246,7 @@ function App() {
       <ZoneSelectorModal
         isOpen={isZoneModalOpen}
         currentZoneCode={zoneCode}
+        language={language}
         onSelectZone={handleSelectZone}
         onUseGps={handleUseGps}
         onClose={() => setIsZoneModalOpen(false)}
@@ -237,16 +258,19 @@ function App() {
         zoneName={zone}
         zoneCode={zoneCode}
         is24Hour={is24Hour}
+        language={language}
         onClose={() => setIsTakwimModalOpen(false)}
       />
 
       <DoaModal
         isOpen={isDoaModalOpen}
+        language={language}
         onClose={() => setIsDoaModalOpen(false)}
       />
 
       <AboutModal
         isOpen={isAboutModalOpen}
+        language={language}
         onClose={() => setIsAboutModalOpen(false)}
       />
     </div>

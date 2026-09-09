@@ -7,15 +7,24 @@
 
 **MODERN COMPANION DURING RAMADHAN**
 
-A beautiful, high-performance Progressive Web App (PWA) designed to provide accurate prayer times, dynamic Iftar countdowns, and Sahur/Imsak tracking with a premium dark Islamic aesthetic. Built for speed, reliability, and 100% offline capability based on official JAKIM data via `waktusolat.app`.
+A beautiful, high-performance Progressive Web App (PWA) designed to provide accurate prayer times, dynamic Iftar countdowns, Sahur/Imsak tracking, and authentic **Azan Maghrib** audio with a premium dark Islamic aesthetic. Built for speed, reliability, and 100% offline capability based on official JAKIM data via `waktusolat.app`.
 
 ---
 
 ## 🚀 Key Features
 
+- **Redesigned Official Logo & App Identity**:
+  - Redesigned vector emblem featuring an Emerald-Cyan crescent (*Hilal*), modern mosque dome & minaret silhouette, and a radiant 8-point gold sparkle star (*Najm*).
+  - High-resolution multi-size PWA icons (`512x512`, `192x192`, `180x180` Apple touch icon, and multi-resolution `favicon.ico`).
+- **Authentic Azan Maghrib Audio Playback**:
+  - Automatically plays authentic **Azan Maghrib** when countdown reaches Iftar time (`00:00:00`).
+  - Active audio wave visualizer with dedicated **"Stop Azan"** controls.
+  - Interactive **"Test Azan"** button to preview playback anytime.
+- **Bilingual Interface (English Default & Bahasa Melayu)**:
+  - English interface by default, easily switchable to standard Bahasa Melayu via the navbar toggle with instant `localStorage` persistence.
 - **Dynamic Dual-Mode Countdown**:
   - **Daytime Mode (Fajr → Maghrib)**: Real-time countdown to Iftar with an animated runner emoji (`🏃` ➔ `🍱`).
-  - **Iftar Celebration (Maghrib window)**: Celebratory banner ("Selamat Berbuka Puasa!") with festive glow.
+  - **Iftar Celebration (Maghrib window)**: Celebratory banner (*"Selamat Berbuka Puasa! / Iftar Mubarak"*) with festive glow.
   - **Nighttime Mode (Maghrib → Imsak/Fajr)**: Countdown to Imsak & Sahur (Tomorrow) with night progress tracking (`🌙` ➔ `🥣`).
 - **Smart Geolocation & Manual Zone Selector**:
   - Auto-detects your Malaysian prayer zone via GPS coordinates.
@@ -23,9 +32,7 @@ A beautiful, high-performance Progressive Web App (PWA) designed to provide accu
 - **Takwim Ramadhan (Jadual Waktu Solat Sebulan)**:
   - Interactive monthly prayer times table highlighting today's schedule and all 5 daily prayers + Imsak, Syuruk, and Maghrib (Iftar).
 - **Panduan Doa & Niat Ramadhan**:
-  - Dedicated reference modal for *Niat Puasa Ramadhan* (Harian & Sebulan) and *Doa Berbuka Puasa* with Arabic calligraphy, Rumi transliteration, and Bahasa Melayu translation, plus one-click copy.
-- **Audio Chime & Web Notifications**:
-  - Synthesized harmonic chime using pure Web Audio API (zero heavy assets, works offline) and browser push notifications when Iftar time arrives.
+  - Dedicated reference modal for *Niat Puasa Ramadhan* (Daily & Full Month) and *Doa Berbuka Puasa* with Arabic calligraphy, Rumi transliteration, English/Malay translation, and one-click copy.
 - **100% Offline PWA & Zero-Latency Cache**:
   - Service Worker (Workbox) with `StaleWhileRevalidate` runtime caching and `localStorage` fallback ensures instant access even without internet connectivity.
 - **12-Hour / 24-Hour Time Format Switcher**:
@@ -42,7 +49,7 @@ A beautiful, high-performance Progressive Web App (PWA) designed to provide accu
 - **State & Caching**: Custom React Hooks (`useSolat`, `useGeoLocation`), `localStorage`, Service Worker Workbox
 - **Date Utilities**: `date-fns`
 - **Testing**: Vitest + `@testing-library/react`
-- **Audio**: Web Audio API Synthesizer
+- **Audio Engine**: HTML5 Audio (Azan Maghrib) + Web Audio API Synthesizer
 
 ---
 
@@ -69,7 +76,8 @@ flowchart TD
         Takwim[Takwim Modal Sebulan]
         Doa[Doa & Niat Guide]
         About[Infaq & Sadaqah Modal]
-        Audio[Web Audio Chime & Notifications]
+        Audio[Azan Maghrib & Notification Engine]
+        Lang[Bilingual i18n Engine: EN / MS]
     end
 
     ZoneMgr --> Data_Layer

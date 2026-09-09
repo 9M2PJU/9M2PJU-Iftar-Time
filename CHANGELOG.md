@@ -2,27 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2026-09-10
+
+### 🎨 Design & Audio Enhancements
+- **Redesigned Official Logo & Icons**:
+  - Replaced legacy emblem with an Islamic vector logo featuring a modern crescent (*Hilal*), mosque dome, minaret spire, and radiant 8-point gold sparkle star.
+  - Generated crisp multi-resolution assets: `icon.svg`, `pwa-512x512.png`, `pwa-192x192.png`, `apple-touch-icon.png`, and `favicon.ico`.
+  - Created reusable `<Logo />` React component.
+- **Azan Maghrib Playback at Iftar**:
+  - Added authentic Azan Maghrib audio playback triggered automatically when countdown reaches 00:00:00.
+  - Added live audio wave visualizer and **"Stop Azan"** controller.
+  - Added **"Test Azan"** button to preview playback.
+- **Bilingual Support (English Default & Bahasa Melayu)**:
+  - English interface set as default.
+  - Added one-click **EN / BM** switcher in navbar with `localStorage` persistence.
+  - Provided proper standard Bahasa Melayu translations across all UI components and modals.
+
+---
+
 ## [1.1.0] - 2026-09-10
 
-### 🚀 New Features & Enhancements
-- **Manual Zone Selector Modal**: Searchable zone picker grouped by Malaysian State (*Negeri*) and District (*Daerah*) covering all JAKIM zones with instant search and GPS auto-detect fallback.
-- **Dynamic Dual-Mode Hero Countdown**:
-  - Automatically switches between **Iftar Mode** (daytime), **Celebration Banner** (Maghrib window), and **Sahur/Imsak Mode** (nighttime).
-  - Manual switcher pill to toggle between Iftar and Sahur countdowns at any time.
-- **Takwim Ramadhan (Jadual Waktu Solat Sebulan)**: Full month prayer times table modal with current day highlighting and responsive layout.
-- **Panduan Doa & Niat Ramadhan**: Reference modal for *Niat Puasa Ramadhan* (Harian & Sebulan) and *Doa Berbuka Puasa* with Arabic, Rumi, Bahasa Melayu translation, and one-click copy.
-- **Web Audio Iftar Chime & Web Notifications**: Harmonic synthesizer chime and browser notification triggered when Iftar arrives with persistent sound toggle.
-- **12-Hour / 24-Hour Format Switcher**: Quick toggle in navbar to switch between 12h (AM/PM) and 24h formats with localStorage persistence.
-- **Infaq & Sadaqah Modal**: Connected About modal with DuitNow QR and developer links, removing premature auto-closing timer.
-
-### 🐛 Bug Fixes & Code Quality
-- Fixed ESLint errors (`react-hooks/static-components`, explicit `any` types, unused variables).
-- Fixed next-prayer highlighting after Isha (properly matching tomorrow's Fajr).
-- Fixed offline support by caching full-month prayer data in `localStorage` alongside Workbox Service Worker runtime caching.
-- Resolved midnight rollover bug by periodically checking and refreshing day data.
-- Removed unused dead code (`useViewportScale.ts`).
-- Fixed favicon and PWA manifest asset references.
-- Added automated unit test suite with Vitest and updated GitHub Actions CI/CD pipeline.
+### 🚀 Features & Stability
+- **Manual Zone Selector Modal**: Searchable zone picker grouped by Malaysian State and District covering all JAKIM zones.
+- **Dynamic Dual-Mode Hero Countdown**: Auto-switching between Iftar mode, Iftar celebration banner, and Sahur/Imsak mode.
+- **Takwim Ramadhan**: Full month prayer times table modal with current day highlighting.
+- **Panduan Doa & Niat Ramadhan**: Du'a guide for fasting intentions and breaking fast.
+- **PWA Offline Mode**: LocalStorage cache and Workbox service worker runtime caching.
+- **Unit Testing Suite**: Added Vitest test suite and CI workflow verification.
 
 ---
 
@@ -30,15 +36,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Launched
 - Initial release of **9M2PJU Iftar Time**.
-- **Modern UI**: Dark theme with Emerald/Cyan accents.
-- **Core Features**:
-    - Automatic zone detection.
-    - Accurate prayer times fetch from `waktusolat.app`.
-    - Real-time countdown to Iftar.
-    - Dynamic Hijri date display.
-
-### ✨ Polish & Enhancements
-- **Layout**: "Perfect Fit" responsive design.
-- **Performance**: PWA Service Worker for offline capability.
+- Modern dark theme with Emerald/Cyan accents.
+- Core prayer times fetching from `waktusolat.app`.
 
 ---

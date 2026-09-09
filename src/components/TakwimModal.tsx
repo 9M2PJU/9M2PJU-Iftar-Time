@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Calendar, MapPin } from 'lucide-react';
 import type { SolatData } from '../hooks/useSolat';
 import { formatHijriDate } from '../utils/hijri';
+import { type Language, TRANSLATIONS } from '../utils/i18n';
 
 interface TakwimModalProps {
     isOpen: boolean;
@@ -10,6 +11,7 @@ interface TakwimModalProps {
     zoneName: string;
     zoneCode: string;
     is24Hour: boolean;
+    language?: Language;
     onClose: () => void;
 }
 
@@ -32,9 +34,11 @@ export const TakwimModal: React.FC<TakwimModalProps> = ({
     zoneName,
     zoneCode,
     is24Hour,
+    language = 'en',
     onClose,
 }) => {
     const todayDate = new Date().getDate();
+    const t = TRANSLATIONS[language].takwimModal;
 
     return (
         <AnimatePresence>
@@ -64,7 +68,7 @@ export const TakwimModal: React.FC<TakwimModalProps> = ({
                                     <Calendar className="w-4 h-4" />
                                 </div>
                                 <div>
-                                    <h2 className="text-base sm:text-lg font-bold text-white">Takwim Waktu Solat Sebulan</h2>
+                                    <h2 className="text-base sm:text-lg font-bold text-white">{t.title}</h2>
                                     <div className="flex items-center gap-1.5 text-[10px] sm:text-xs text-slate-400 mt-0.5">
                                         <MapPin className="w-3 h-3 text-emerald-400" />
                                         <span>{zoneName}</span>
@@ -84,22 +88,22 @@ export const TakwimModal: React.FC<TakwimModalProps> = ({
                         <div className="flex-1 overflow-auto p-2 sm:p-4">
                             {prayers.length === 0 ? (
                                 <div className="text-center py-12 text-slate-500 text-xs sm:text-sm">
-                                    Tiada jadual dimuatkan. Sila semak sambungan internet.
+                                    {t.noSchedule}
                                 </div>
                             ) : (
                                 <div className="overflow-x-auto rounded-2xl border border-white/5">
                                     <table className="w-full text-left border-collapse text-[11px] sm:text-xs">
                                         <thead>
                                             <tr className="bg-slate-800/80 text-slate-400 uppercase font-semibold tracking-wider border-b border-white/10">
-                                                <th className="p-2.5 sm:p-3 text-center">Hari</th>
-                                                <th className="p-2.5 sm:p-3">Tarikh Hijri</th>
-                                                <th className="p-2.5 sm:p-3 text-cyan-400">Imsak</th>
-                                                <th className="p-2.5 sm:p-3">Subuh</th>
-                                                <th className="p-2.5 sm:p-3">Syuruk</th>
-                                                <th className="p-2.5 sm:p-3">Zohor</th>
-                                                <th className="p-2.5 sm:p-3">Asar</th>
-                                                <th className="p-2.5 sm:p-3 text-emerald-400 font-bold">Maghrib (Iftar)</th>
-                                                <th className="p-2.5 sm:p-3">Isyak</th>
+                                                <th className="p-2.5 sm:p-3 text-center">{t.day}</th>
+                                                <th className="p-2.5 sm:p-3">{t.hijriDate}</th>
+                                                <th className="p-2.5 sm:p-3 text-cyan-400">{t.imsak}</th>
+                                                <th className="p-2.5 sm:p-3">{t.fajr}</th>
+                                                <th className="p-2.5 sm:p-3">{t.syuruk}</th>
+                                                <th className="p-2.5 sm:p-3">{t.dhuhr}</th>
+                                                <th className="p-2.5 sm:p-3">{t.asr}</th>
+                                                <th className="p-2.5 sm:p-3 text-emerald-400 font-bold">{t.maghrib}</th>
+                                                <th className="p-2.5 sm:p-3">{t.isha}</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-white/5">

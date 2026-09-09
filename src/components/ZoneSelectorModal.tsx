@@ -2,10 +2,12 @@ import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Search, Navigation, MapPin, Check } from 'lucide-react';
 import { ALL_ZONES, ZONE_STATE_MAP, type ZoneItem } from '../utils/zones';
+import { type Language, TRANSLATIONS } from '../utils/i18n';
 
 interface ZoneSelectorModalProps {
     isOpen: boolean;
     currentZoneCode: string;
+    language?: Language;
     onSelectZone: (zoneCode: string) => void;
     onUseGps: () => void;
     onClose: () => void;
@@ -14,12 +16,15 @@ interface ZoneSelectorModalProps {
 export const ZoneSelectorModal: React.FC<ZoneSelectorModalProps> = ({
     isOpen,
     currentZoneCode,
+    language = 'en',
     onSelectZone,
     onUseGps,
     onClose,
 }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedState, setSelectedState] = useState<string>('ALL');
+
+    const t = TRANSLATIONS[language].zoneModal;
 
     const states = useMemo(() => {
         return ['ALL', ...Object.values(ZONE_STATE_MAP)];
@@ -66,8 +71,8 @@ export const ZoneSelectorModal: React.FC<ZoneSelectorModalProps> = ({
                                     <MapPin className="w-4 h-4" />
                                 </div>
                                 <div>
-                                    <h2 className="text-base sm:text-lg font-bold text-white">Pilih Zon Waktu Solat</h2>
-                                    <p className="text-[10px] sm:text-xs text-slate-400">Senarai rasmi zon JAKIM seluruh Malaysia</p>
+                                    <h2 className="text-base sm:text-lg font-bold text-white">{t.title}</h2>
+                                    <p className="text-[10px] sm:text-xs text-slate-400">{t.subtitle}</p>
                                 </div>
                             </div>
                             <button
@@ -89,7 +94,7 @@ export const ZoneSelectorModal: React.FC<ZoneSelectorModalProps> = ({
                                 className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 transition-all active:scale-[0.99]"
                             >
                                 <Navigation className="w-4 h-4 animate-pulse" />
-                                Guna Lokasi Semasa Saya (GPS Auto-Detect)
+                                {t.useGps}
                             </button>
 
                             {/* Search Input */}
@@ -97,7 +102,7 @@ export const ZoneSelectorModal: React.FC<ZoneSelectorModalProps> = ({
                                 <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                                 <input
                                     type="text"
-                                    placeholder="Cari daerah, negeri, atau kod zon (cth: Shah Alam, SGR01)..."
+                                    placeholder={t.searchPlaceholder}
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     className="w-full pl-10 pr-4 py-2 bg-slate-800/80 border border-white/10 rounded-xl text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors"
@@ -107,7 +112,7 @@ export const ZoneSelectorModal: React.FC<ZoneSelectorModalProps> = ({
                                         onClick={() => setSearchQuery('')}
                                         className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs"
                                     >
-                                        Padam
+                                        {t.clear}
                                     </button>
                                 )}
                             </div>
@@ -124,7 +129,7 @@ export const ZoneSelectorModal: React.FC<ZoneSelectorModalProps> = ({
                                                 : 'bg-slate-800/70 text-slate-400 hover:text-slate-200'
                                         }`}
                                     >
-                                        {st === 'ALL' ? 'Semua Negeri' : st}
+                                        {st === 'ALL' ? t.allStates : st}
                                     </button>
                                 ))}
                             </div>
@@ -134,7 +139,7 @@ export const ZoneSelectorModal: React.FC<ZoneSelectorModalProps> = ({
                         <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-2">
                             {filteredZones.length === 0 ? (
                                 <div className="text-center py-10 text-slate-500 text-xs sm:text-sm">
-                                    Tiada zon ditemui untuk &quot;{searchQuery}&quot;
+                                    {t.noResults} &quot;{searchQuery}&quot;
                                 </div>
                             ) : (
                                 filteredZones.map((item) => {

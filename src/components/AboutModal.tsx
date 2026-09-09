@@ -1,13 +1,18 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Heart, ExternalLink, Coffee, Radio } from 'lucide-react';
+import { Logo } from './Logo';
+import { type Language, TRANSLATIONS } from '../utils/i18n';
 
 interface AboutModalProps {
     isOpen: boolean;
+    language?: Language;
     onClose: () => void;
 }
 
-export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
+export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, language = 'en', onClose }) => {
+    const t = TRANSLATIONS[language].aboutModal;
+
     return (
         <AnimatePresence>
             {isOpen && (
@@ -45,38 +50,23 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
 
                         {/* Content Area */}
                         <div className="p-5 md:p-6 pt-0">
-                            <div className="flex flex-col items-center text-center -mt-8 mb-4">
-                                <div className="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-emerald-500/30 mb-3 border-4 border-[#0f172a]">
-                                    <svg viewBox="0 0 512 512" fill="none" className="w-10 h-10 text-white" stroke="currentColor" strokeWidth="12">
-                                        <path
-                                            d="M250 50 C 200 50 150 100 150 200 C 150 350 280 450 400 400 C 350 450 200 420 200 200 C 200 100 250 50 250 50 Z"
-                                            fill="currentColor"
-                                            stroke="none"
-                                        />
-                                        <path
-                                            d="M300 350 L 300 200 A 50 50 0 0 1 400 200 L 400 350 Z"
-                                            stroke="currentColor"
-                                            strokeWidth="25"
-                                            strokeLinecap="round"
-                                        />
-                                        <circle cx="350" cy="160" r="20" fill="currentColor" stroke="none" />
-                                    </svg>
-                                </div>
+                            <div className="flex flex-col items-center text-center -mt-9 mb-4">
+                                <Logo className="w-18 h-18 sm:w-20 sm:h-20 mb-3 border-4 border-[#0f172a] shadow-2xl" />
                                 <h2 className="text-xl font-bold text-white mb-0.5">9M2PJU Iftar Time</h2>
                                 <p className="text-emerald-400 font-bold text-[10px] tracking-wider uppercase">
-                                    MODERN COMPANION DURING RAMADHAN
+                                    {t.tagline}
                                 </p>
                             </div>
 
                             <div className="space-y-3">
                                 <p className="text-slate-300 text-xs leading-relaxed text-center px-2">
-                                    Aplikasi panduan waktu solat dan kiraan detik waktu berbuka puasa / sahur tepat berasaskan zon rasmi JAKIM Malaysia.
+                                    {t.desc}
                                 </p>
 
                                 {/* Developer Section */}
                                 <div className="bg-white/5 rounded-2xl p-3.5 border border-white/5">
                                     <h3 className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                        <Coffee className="w-3.5 h-3.5 text-emerald-400" /> DIBANGUNKAN OLEH
+                                        <Coffee className="w-3.5 h-3.5 text-emerald-400" /> {t.developedBy}
                                     </h3>
                                     <a
                                         href="https://hamradio.my"
@@ -91,7 +81,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
                                             <p className="text-[10px] text-slate-400">hamradio.my</p>
                                         </div>
                                         <div className="flex items-center gap-1 text-xs text-emerald-400 font-semibold group-hover:translate-x-0.5 transition-transform">
-                                            <span>Lawati</span>
+                                            <span>{t.visit}</span>
                                             <ExternalLink className="w-3.5 h-3.5" />
                                         </div>
                                     </a>
@@ -100,10 +90,10 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
                                 {/* Sadaqah Section */}
                                 <div className="bg-emerald-500/5 rounded-2xl p-4 border border-emerald-500/10 text-center">
                                     <h3 className="text-emerald-400 font-bold mb-1 flex items-center justify-center gap-2 text-sm sm:text-base">
-                                        <Heart className="w-4 h-4 fill-emerald-400 text-emerald-400" /> Infaq &amp; Sokongan
+                                        <Heart className="w-4 h-4 fill-emerald-400 text-emerald-400" /> {t.supportTitle}
                                     </h3>
                                     <p className="text-slate-400 text-[10px] sm:text-xs mb-3 leading-tight">
-                                        Sokong penyelenggaraan pelayan dan pembangunan aplikasi ini.
+                                        {t.supportDesc}
                                     </p>
 
                                     <div className="bg-white p-2 rounded-xl inline-block shadow-lg">
@@ -114,7 +104,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
                                         />
                                     </div>
                                     <p className="text-[9px] text-slate-500 mt-2 font-bold uppercase tracking-wider">
-                                        DuitNow QR / Scan untuk Infaq
+                                        {t.scanPrompt}
                                     </p>
                                 </div>
                             </div>
@@ -123,7 +113,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
                                 onClick={onClose}
                                 className="w-full mt-4 py-2.5 px-6 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl transition-all shadow-md text-xs sm:text-sm active:scale-[0.98]"
                             >
-                                Kembali ke Aplikasi
+                                {t.backToApp}
                             </button>
                         </div>
                     </motion.div>
