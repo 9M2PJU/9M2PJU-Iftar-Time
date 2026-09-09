@@ -1,3 +1,9 @@
+export interface ZoneItem {
+    code: string;
+    state: string;
+    locations: string;
+}
+
 export const ZONE_NAMES: Record<string, string> = {
     'SGR01': 'Gombak, Petaling, Sepang, Hulu Langat, Hulu Selangor, Shah Alam',
     'SGR02': 'Kuala Selangor, Sabak Bernam',
@@ -59,6 +65,38 @@ export const ZONE_NAMES: Record<string, string> = {
     'TRG04': 'Dungun, Kemaman',
 };
 
+export const ZONE_STATE_MAP: Record<string, string> = {
+    'SGR': 'Selangor',
+    'WLY': 'Wilayah Persekutuan',
+    'JHR': 'Johor',
+    'KDH': 'Kedah',
+    'KTN': 'Kelantan',
+    'MLK': 'Melaka',
+    'NGS': 'Negeri Sembilan',
+    'PHG': 'Pahang',
+    'PLS': 'Perlis',
+    'PNG': 'Pulau Pinang',
+    'PRK': 'Perak',
+    'SBH': 'Sabah',
+    'SWK': 'Sarawak',
+    'TRG': 'Terengganu',
+};
+
+export const ALL_ZONES: ZoneItem[] = Object.entries(ZONE_NAMES).map(([code, locations]) => {
+    const prefix = code.slice(0, 3);
+    const state = ZONE_STATE_MAP[prefix] || 'Malaysia';
+    return {
+        code,
+        state,
+        locations,
+    };
+});
+
 export const getZoneName = (zoneCode: string): string => {
     return ZONE_NAMES[zoneCode] || zoneCode;
+};
+
+export const getZoneState = (zoneCode: string): string => {
+    const prefix = zoneCode.slice(0, 3);
+    return ZONE_STATE_MAP[prefix] || '';
 };

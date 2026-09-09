@@ -13,13 +13,51 @@ export default defineConfig({
       workbox: {
         clientsClaim: true,
         skipWaiting: true,
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/api\.waktusolat\.app\/v2\/solat\/.*/i,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'waktusolat-api-cache',
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'google-fonts-stylesheets',
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 365,
+              },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'google-fonts-webfonts',
+              expiration: {
+                maxEntries: 30,
+                maxAgeSeconds: 60 * 60 * 24 * 365,
+              },
+            },
+          },
+        ],
       },
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
+      includeAssets: ['icon.svg', 'pwa-192x192.png', 'pwa-512x512.png', 'sadaqah_qr.png'],
       manifest: {
         name: '9M2PJU Iftar Time',
         short_name: 'Iftar Time',
-        description: 'Get accurate Iftar and Prayer times based on your location.',
-        theme_color: '#0f172a', // Dark slate/blue/green tone
+        description: 'Kiraan detik waktu Iftar dan waktu solat tepat seluruh Malaysia berasaskan data JAKIM.',
+        theme_color: '#0f172a',
         background_color: '#0f172a',
         display: 'standalone',
         scope: '/',

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface Location {
     latitude: number;
@@ -14,7 +14,6 @@ interface GeoLocationState {
 const CACHE_KEY = 'iftar_last_location';
 
 export const useGeoLocation = () => {
-    // 1. Initialize state from localStorage if available
     const [state, setState] = useState<GeoLocationState>(() => {
         try {
             const cached = localStorage.getItem(CACHE_KEY);
@@ -23,7 +22,7 @@ export const useGeoLocation = () => {
                 return {
                     location: parsed,
                     error: null,
-                    loading: false, // Not loading initially if we have cache
+                    loading: false,
                 };
             }
         } catch (e) {
@@ -36,7 +35,7 @@ export const useGeoLocation = () => {
         };
     });
 
-    useEffect(() => {
+    const requestLocation = useCallback(() => {
         if (!navigator.geolocation) {
             setState((prev) => ({
                 ...prev,
@@ -46,18 +45,19 @@ export const useGeoLocation = () => {
             return;
         }
 
-        let mounted = true;
+        setState((prev) => ({ ...prev, loading: true, error: null }));
 
         const handleSuccess = (position: GeolocationPosition) => {
-            if (!mounted) return;
-
             const newLocation = {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
             };
 
-            // Update cache
-            localStorage.setItem(CACHE_KEY, JSON.stringify(newLocation));
+            try {
+                localStorage.setItem(CACHE_KEY, JSON.stringify(newLocation));
+            } catch {
+                // Ignore storage error
+            }
 
             setState({
                 location: newLocation,
@@ -67,13 +67,11 @@ export const useGeoLocation = () => {
         };
 
         const handleError = (error: GeolocationPositionError) => {
-            if (!mounted) return;
-
             let errorMessage = 'An unknown error occurred.';
 
             switch (error.code) {
                 case error.PERMISSION_DENIED:
-                    errorMessage = 'Location access denied. Please enable location services.';
+                    errorMessage = 'Location access denied. Please select your zone manually.';
                     break;
                 case error.POSITION_UNAVAILABLE:
                     errorMessage = 'Location information is unavailable.';
@@ -85,23 +83,21 @@ export const useGeoLocation = () => {
 
             setState((prev) => ({
                 ...prev,
-                // Keep the previous location (cache) if we have it, don't wipe it on error
-                error: prev.location ? null : errorMessage, // Only show error if we have NO data
+                error: prev.location ? null : errorMessage,
                 loading: false,
             }));
         };
 
-        // increased timeout to 30s and maxAge to 5 mins to accept slightly older cached positions from OS
         navigator.geolocation.getCurrentPosition(handleSuccess, handleError, {
             enableHighAccuracy: true,
-            timeout: 30000,
+            timeout: 15000,
             maximumAge: 300000,
         });
-
-        return () => {
-            mounted = false;
-        };
     }, []);
 
-    return state;
+    useEffect(() => {
+        requestLocation();
+    }, [requestLocation]);
+
+    return { ...state, requestLocation };
 };

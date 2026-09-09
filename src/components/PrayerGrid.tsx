@@ -1,68 +1,112 @@
-
 import React from 'react';
 import clsx from 'clsx';
-import { Sun, Moon, CloudSun, Sunrise } from 'lucide-react';
+import { Sun, Moon, CloudSun, Sunrise, Sunset, Clock } from 'lucide-react';
 
-interface PrayerTime {
+export interface PrayerTimeItem {
     name: string;
+    displayName?: string;
     time: string | undefined | null; // HH:mm format
     isNext?: boolean;
-    isPast?: boolean;
+    isIftar?: boolean;
 }
 
 interface PrayerGridProps {
-    prayers: PrayerTime[];
+    prayers: PrayerTimeItem[];
+    is24Hour?: boolean;
 }
 
-export const PrayerGrid: React.FC<PrayerGridProps> = ({ prayers }) => {
-    return (
-        <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-1.5 sm:gap-4 xl:gap-4 2xl:gap-4 w-full max-w-6xl 2xl:max-w-[1300px] mx-auto px-2 sm:px-4 pb-1 md:pb-2 transition-all duration-500">
-            {prayers.map((prayer) => (
-                <PrayerCard key={prayer.name} prayer={prayer} />
-            ))}
-        </div>
-    );
+const PRAYER_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+    imsak: Clock,
+    fajr: Sunrise,
+    subuh: Sunrise,
+    syuruk: Sun,
+    dhuhr: Sun,
+    zohor: Sun,
+    asr: CloudSun,
+    asar: CloudSun,
+    maghrib: Sunset,
+    isha: Moon,
+    isyak: Moon,
 };
 
-const PrayerCard = ({ prayer }: { prayer: PrayerTime }) => {
-    const Icon = getIconForPrayer(prayer.name);
+const formatDisplayTime = (time24: string | undefined | null, is24Hour: boolean) => {
+    if (!time24 || typeof time24 !== 'string') return '--:--';
+    if (is24Hour) return time24;
+
+    const [hStr, mStr] = time24.split(':');
+    const h = parseInt(hStr, 10);
+    const m = parseInt(mStr, 10);
+    if (isNaN(h) || isNaN(m)) return time24;
+
+    const h12 = h % 12 || 12;
+    return `${h12}:${mStr.padStart(2, '0')}`;
+};
+
+const getAmPm = (time24: string | undefined | null) => {
+    if (!time24 || typeof time24 !== 'string') return '';
+    const h = parseInt(time24.split(':')[0], 10);
+    if (isNaN(h)) return '';
+    return h >= 12 ? 'PM' : 'AM';
+};
+
+const PrayerCard: React.FC<{ prayer: PrayerTimeItem; is24Hour: boolean }> = ({ prayer, is24Hour }) => {
+    const key = prayer.name.toLowerCase();
+    const IconComponent = PRAYER_ICONS[key] || Sun;
 
     return (
-        <div className={clsx(
-            "relative p-2 sm:p-5 md:p-6 xl:p-6 2xl:p-5 rounded-xl sm:rounded-3xl 2xl:rounded-3xl border transition-all duration-300 overflow-hidden group flex flex-col justify-between min-h-[80px] sm:min-h-0",
-            prayer.isNext
-                ? "bg-slate-900 border-emerald-500 shadow-xl shadow-emerald-500/20 scale-[1.02]"
-                : "bg-slate-800/40 border-white/5 hover:bg-slate-800/60"
-        )}>
+        <div
+            className={clsx(
+                "relative p-2.5 sm:p-4 md:p-5 xl:p-5 rounded-2xl sm:rounded-3xl border transition-all duration-300 overflow-hidden flex flex-col justify-between min-h-[90px] sm:min-h-0 select-none",
+                prayer.isNext
+                    ? "bg-gradient-to-b from-slate-900 to-emerald-950/40 border-emerald-500 shadow-xl shadow-emerald-500/20 scale-[1.02] ring-1 ring-emerald-400/50"
+                    : "bg-slate-800/40 border-white/5 hover:bg-slate-800/60"
+            )}
+        >
             {prayer.isNext && (
-                <div className="absolute top-3 right-3 animate-pulse">
-                    <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_15px_#34d399]" />
+                <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 animate-pulse">
+                    <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_12px_#34d399]" />
                 </div>
             )}
 
-            <div className="flex justify-between items-center mb-3 sm:mb-4">
-                <Icon className={clsx("w-3.5 h-3.5 sm:w-6 sm:h-6 xl:w-8 xl:h-8", prayer.isNext ? "text-emerald-400" : "text-slate-400")} />
-                {prayer.isNext && (
-                    <span className="px-1 py-0.5 xl:px-3 xl:py-1 rounded-sm xl:rounded-md text-[7px] xl:text-xs font-bold bg-emerald-500 text-slate-900">NEXT</span>
-                )}
-                {!prayer.isNext && prayer.time && (
-                    <span className="px-1 py-0.5 xl:px-2.5 xl:py-1 rounded-sm xl:rounded-md text-[7px] sm:text-[10px] xl:text-xs font-medium bg-slate-700/50 text-slate-400 uppercase">
-                        {parseInt(prayer.time) >= 12 ? 'PM' : 'AM'}
+            <div className="flex justify-between items-center mb-2 sm:mb-3">
+                <IconComponent
+                    className={clsx(
+                        "w-4 h-4 sm:w-5 sm:h-5 xl:w-6 xl:h-6",
+                        prayer.isNext ? "text-emerald-400" : "text-slate-400"
+                    )}
+                />
+                {prayer.isNext ? (
+                    <span className="px-1.5 py-0.5 rounded-full text-[8px] sm:text-[9px] font-extrabold bg-emerald-500 text-slate-950 uppercase tracking-wider">
+                        SETERUSNYA
                     </span>
+                ) : (
+                    prayer.time && !is24Hour && (
+                        <span className="px-1.5 py-0.5 rounded text-[8px] sm:text-[9px] font-semibold bg-slate-700/50 text-slate-400 uppercase">
+                            {getAmPm(prayer.time)}
+                        </span>
+                    )
                 )}
             </div>
 
-            <div className="mt-1">
-                <h3 className="text-[8px] sm:text-xs xl:text-xs 2xl:text-sm font-semibold text-slate-400 tracking-wider uppercase mb-0.5 xl:mb-1 truncate">{prayer.name}</h3>
-                <p className={clsx("text-sm sm:text-2xl lg:text-2xl xl:text-2xl 2xl:text-3xl font-bold tracking-tight", prayer.isNext ? "text-white" : "text-slate-200")}>
-                    {formatTime12Hour(prayer.time)}
+            <div className="mt-auto">
+                <h3 className="text-[9px] sm:text-xs font-semibold text-slate-400 tracking-wider uppercase mb-0.5 truncate">
+                    {prayer.displayName || prayer.name}
+                </h3>
+                <p
+                    className={clsx(
+                        "text-base sm:text-xl md:text-2xl xl:text-3xl font-black tracking-tight tabular-nums",
+                        prayer.isNext ? "text-white" : "text-slate-200"
+                    )}
+                >
+                    {formatDisplayTime(prayer.time, is24Hour)}
                 </p>
-                {prayer.name === 'Maghrib' && prayer.isNext && (
-                    <p className="text-[7px] sm:text-xs xl:text-xs text-emerald-400 mt-1 xl:mt-1 font-medium tracking-wide">IFTAR</p>
+                {prayer.isIftar && (
+                    <p className="text-[8px] sm:text-[10px] text-emerald-400 mt-0.5 font-bold tracking-wider uppercase">
+                        IFTAR 🌙
+                    </p>
                 )}
             </div>
 
-            {/* Green Glow for active card */}
             {prayer.isNext && (
                 <div className="absolute inset-x-0 bottom-0 h-1 bg-emerald-500 rounded-b-3xl" />
             )}
@@ -70,23 +114,12 @@ const PrayerCard = ({ prayer }: { prayer: PrayerTime }) => {
     );
 };
 
-// Helper Functions
-const getIconForPrayer = (name: string) => {
-    switch (name.toLowerCase()) {
-        case 'fajr': return Sunrise;
-        case 'syuruk': return Sun;
-        case 'dhuhr': return Sun;
-        case 'asr': return CloudSun;
-        case 'maghrib': return Moon; // Sunset/Moon
-        case 'isha': return Moon;
-        default: return Sun;
-    }
-};
-
-const formatTime12Hour = (time24: string | undefined | null) => {
-    if (!time24 || typeof time24 !== 'string') return '--:--';
-    const [h, m] = time24.split(':').map(Number);
-    if (isNaN(h) || isNaN(m)) return time24;
-    const h12 = h % 12 || 12;
-    return `${h12}:${m.toString().padStart(2, '0')}`;
+export const PrayerGrid: React.FC<PrayerGridProps> = ({ prayers, is24Hour = false }) => {
+    return (
+        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-6 gap-2 sm:gap-3 xl:gap-4 w-full max-w-6xl 2xl:max-w-[1300px] mx-auto px-2 sm:px-4 pb-1 transition-all duration-500">
+            {prayers.map((prayer) => (
+                <PrayerCard key={prayer.name} prayer={prayer} is24Hour={is24Hour} />
+            ))}
+        </div>
+    );
 };

@@ -1,11 +1,12 @@
 
 const HIJRI_MONTHS = [
-    'Muharram', 'Safar', 'Rabi\' al-Awwal', 'Rabi\' al-Thani',
-    'Jumada al-Awwal', 'Jumada al-Thani', 'Rajab', 'Sha\'ban',
-    'Ramadan', 'Shawwal', 'Dhu al-Qi\'dah', 'Dhu al-Hijjah'
+    'Muharram', 'Safar', "Rabi' al-Awwal", "Rabi' al-Thani",
+    'Jumada al-Awwal', 'Jumada al-Thani', 'Rajab', "Sha'ban",
+    'Ramadan', 'Shawwal', "Dhu al-Qi'dah", 'Dhu al-Hijjah'
 ];
 
-export const formatHijriDate = (dateStr: string): string => {
+export const formatHijriDate = (dateStr: string | undefined | null): string => {
+    if (!dateStr) return '';
     try {
         const parts = dateStr.split('-');
         if (parts.length !== 3) return dateStr;
@@ -14,10 +15,11 @@ export const formatHijriDate = (dateStr: string): string => {
         const monthIndex = parseInt(parts[1], 10) - 1;
         const day = parseInt(parts[2], 10);
 
-        if (monthIndex < 0 || monthIndex >= 12) return dateStr;
+        if (monthIndex < 0 || monthIndex >= 12 || isNaN(day)) return dateStr;
 
         return `${day} ${HIJRI_MONTHS[monthIndex]} ${year}`;
-    } catch (e) {
+    } catch {
         return dateStr;
     }
 };
+

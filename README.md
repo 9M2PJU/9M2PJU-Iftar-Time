@@ -7,78 +7,125 @@
 
 **MODERN COMPANION DURING RAMADHAN**
 
-A beautiful, high-performance Progressive Web App (PWA) designed to provide accurate prayer times and Iftar countdowns with a premium dark Islamic aesthetic. Built for speed, reliability, and offline usage.
+A beautiful, high-performance Progressive Web App (PWA) designed to provide accurate prayer times, dynamic Iftar countdowns, and Sahur/Imsak tracking with a premium dark Islamic aesthetic. Built for speed, reliability, and 100% offline capability based on official JAKIM data via `waktusolat.app`.
 
-## 🚀 Features
+---
 
-- **Dynamic Iftar Countdown**: Large, easy-to-read countdown timer to Maghrib.
-- **Smart Geolocation**: Automatically detects your zone and fetches official JAKIM data via `waktusolat.app`.
-- **Descriptive Zone Names**: Displays full district names (e.g., *Gombak, Petaling*) instead of cryptic codes.
-- **Native Mobile Feel**: Designed with safe-area insets, sticky headers, and touch-optimized scale effects for a true app-like experience.
-- **Dashboard Layout**: Perfect "no-scroll" fit on desktop screens, naturally balanced for large displays.
-- **Prayer Grid**: Clean visualization of all 5 daily prayers + Syuruk with active prayer highlighting.
-- **Hijri Date**: Displays the current Islamic date (e.g., *21 Sha'ban 1447*).
-- **Offline PWA**: Installable on iOS/Android, works without internet after first load.
+## 🚀 Key Features
+
+- **Dynamic Dual-Mode Countdown**:
+  - **Daytime Mode (Fajr → Maghrib)**: Real-time countdown to Iftar with an animated runner emoji (`🏃` ➔ `🍱`).
+  - **Iftar Celebration (Maghrib window)**: Celebratory banner ("Selamat Berbuka Puasa!") with festive glow.
+  - **Nighttime Mode (Maghrib → Imsak/Fajr)**: Countdown to Imsak & Sahur (Tomorrow) with night progress tracking (`🌙` ➔ `🥣`).
+- **Smart Geolocation & Manual Zone Selector**:
+  - Auto-detects your Malaysian prayer zone via GPS coordinates.
+  - Searchable **Manual Zone Selector** categorized by State (*Negeri*) and District (*Daerah*) covering all JAKIM zones across Malaysia.
+- **Takwim Ramadhan (Jadual Waktu Solat Sebulan)**:
+  - Interactive monthly prayer times table highlighting today's schedule and all 5 daily prayers + Imsak, Syuruk, and Maghrib (Iftar).
+- **Panduan Doa & Niat Ramadhan**:
+  - Dedicated reference modal for *Niat Puasa Ramadhan* (Harian & Sebulan) and *Doa Berbuka Puasa* with Arabic calligraphy, Rumi transliteration, and Bahasa Melayu translation, plus one-click copy.
+- **Audio Chime & Web Notifications**:
+  - Synthesized harmonic chime using pure Web Audio API (zero heavy assets, works offline) and browser push notifications when Iftar time arrives.
+- **100% Offline PWA & Zero-Latency Cache**:
+  - Service Worker (Workbox) with `StaleWhileRevalidate` runtime caching and `localStorage` fallback ensures instant access even without internet connectivity.
+- **12-Hour / 24-Hour Time Format Switcher**:
+  - User-configurable time format with persistent settings.
+- **Support & Infaq (Sadaqah Modal)**:
+  - Direct DuitNow QR integration to support server hosting and continuous development.
+
+---
 
 ## 🛠️ Tech Stack
 
-- **Framework**: React 18 + TypeScript + Vite
-- **Styling**: Tailwind CSS (v4) + Lucide Icons
-- **State Management**: React Hooks (Custom `useSolat`, `useGeoLocation`)
-- **Date Handling**: `date-fns`
+- **Framework**: React 19 + TypeScript + Vite
+- **Styling**: Tailwind CSS (v4) + Framer Motion + Lucide Icons
+- **State & Caching**: Custom React Hooks (`useSolat`, `useGeoLocation`), `localStorage`, Service Worker Workbox
+- **Date Utilities**: `date-fns`
+- **Testing**: Vitest + `@testing-library/react`
+- **Audio**: Web Audio API Synthesizer
+
+---
 
 ## 🏗️ Architecture
 
 ```mermaid
-graph TD
-    User[User Device] -->|Visits PWA| App[React App]
-    App -->|Get Location| Geo[Geolocation API]
-    App -->|Fetch Zone Data| API[waktusolat.ap]
-    API -->|JSON Response| App
-    App -->|Calculate| Logic[Prayer Logic]
-    Logic -->|Format Time| Display[UI Display]
+flowchart TD
+    User([User / Browser]) -->|Loads PWA| App[React 19 Application]
     
-    subgraph "Capabilities"
-    PWA[Service Worker]
-    Cache[Local Storage]
+    subgraph Location_Zone ["Location & Zone Engine"]
+        Geo[GPS Geolocation API] --> ZoneMgr[Zone Selector / Fallback]
+        Manual[Manual State & District Picker] --> ZoneMgr
     end
-    
-    App -.-> PWA
+
+    subgraph Data_Layer ["Data & Offline Layer"]
+        API[waktusolat.app JAKIM API]
+        SW[Workbox Service Worker]
+        Storage[LocalStorage Cache]
+    end
+
+    subgraph UI_Modules ["Interactive Modules"]
+        Hero[Countdown Hero: Iftar / Sahur]
+        Grid[Prayer Grid 12h/24h]
+        Takwim[Takwim Modal Sebulan]
+        Doa[Doa & Niat Guide]
+        About[Infaq & Sadaqah Modal]
+        Audio[Web Audio Chime & Notifications]
+    end
+
+    ZoneMgr --> Data_Layer
+    Data_Layer --> App
+    App --> UI_Modules
 ```
 
-## 📦 Installation
+---
 
-To run this project locally:
+## 📦 Installation & Local Development
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/9M2PJU/9M2PJU-Iftar-Time.git
-    cd 9M2PJU-Iftar-Time
-    ```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/9M2PJU/9M2PJU-Iftar-Time.git
+   cd 9M2PJU-Iftar-Time
+   ```
 
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    # or
-    yarn install
-    ```
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-3.  **Start the development server:**
-    ```bash
-    npm run dev
-    ```
+3. **Start development server:**
+   ```bash
+   npm run dev
+   ```
 
-4.  **Build for production:**
-    ```bash
-    npm run build
-    ```
+4. **Run unit tests:**
+   ```bash
+   npm test
+   ```
+
+5. **Run linter:**
+   ```bash
+   npm run lint
+   ```
+
+6. **Build for production:**
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 🌐 Deployment
+
+The application is deployed automatically to GitHub Pages via GitHub Actions on every push to `main`. Custom domain: `iftar.hamradio.my`.
+
+---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request for any improvements.
+Contributions, bug reports, and suggestions are welcome! Please open an issue or pull request.
 
 ---
 
 <p align="center">
-  Made with ❤️ by <a href="https://hamradio.my">9M2PJU</a>
+  Made with ❤️ for the Ummah by <a href="https://hamradio.my">9M2PJU</a>
 </p>
