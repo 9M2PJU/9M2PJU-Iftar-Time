@@ -137,3 +137,9 @@ Contributions, bug reports, and suggestions are welcome! Please open an issue or
 <p align="center">
   Made with ❤️ for the Ummah by <a href="https://hamradio.my">9M2PJU</a>
 </p>
+
+## Support
+
+If you find this project useful, please consider supporting it:
+
+[![Donate with PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9m2pju%40hamradio.my&currency_code=MYR&item_name=9M2PJU-Iftar-Time)
